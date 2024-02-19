@@ -5,26 +5,23 @@ import { useState } from 'react';
 import { Stack, Button, Container, Typography, Card, Box } from '@mui/material';
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
 import Iconify from '../../ui-component/iconify';
-import AddTask from './AddTask';
+import AddCalls from './Addcalls';
 import Modal from '@mui/material/Modal';
-
 // ----------------------------------------------------------------------
 
-const policyData = [
+const callData = [
   {
     id: 1,
-    type: "People",
-    name: "Aman",
-    status: "New",
-    source: "Website",
-    country: "In India",
-    phone: "56656654654",
-    email: "admin@gmail.com"
+    name: "Samyotech software solutions pvt ltd",
+    contact: "info@sam.com",
+    country: "India",
+    phone: "656565656",
+    email: "info@sam.com",
+    website: "www.sam.com"
   }
 ];
-const Task = () => {
+const Call = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,27 +39,18 @@ const Task = () => {
   };
   const columns = [
     {
-      field: 'type',
-      headerName: 'Type',
-      flex: 1,
-      cellClassName: 'name-column--cell name-column--cell--capitalize'
-    },
-    {
       field: 'name',
       headerName: 'Name',
       flex: 1,
-      cellClassName: 'name-column--cell--capitalize'
+      cellClassName: 'name-column--cell name-column--cell--capitalize'
     },
+
     {
-      field: 'status',
-      headerName: 'Status',
+      field: 'contact',
+      headerName: 'Contact',
       flex: 1
     },
-    {
-      field: 'source',
-      headerName: 'Source',
-      flex: 1
-    },
+
     {
       field: 'country',
       headerName: 'Country',
@@ -71,11 +59,17 @@ const Task = () => {
     {
       field: 'phone',
       headerName: 'Phone',
-      flex: 1
+      flex: 1,
+      cellClassName: 'name-column--cell--capitalize'
     },
     {
       field: 'email',
       headerName: 'Email',
+      flex: 1
+    },
+    {
+      field: 'website',
+      headerName: 'Website',
       flex: 1
     },
     {
@@ -115,18 +109,17 @@ const Task = () => {
       // eslint-disable-next-line arrow-body-style
     }
   ];
-
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <AddTask open={openAdd} handleClose={handleCloseAdd} />
+      <AddCalls open={openAdd} handleClose={handleCloseAdd} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Lead List</Typography>
+          <Typography variant="h4">Company List</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
-              Add New Lead
+              Add New Company
             </Button>
           </Stack>
         </Stack>
@@ -134,7 +127,7 @@ const Task = () => {
           <Box width="100%">
             <Card style={{ height: '600px', paddingTop: '15px' }}>
               <DataGrid
-                rows={policyData}
+                rows={callData}
                 columns={columns}
                 checkboxSelection
                 getRowId={(row) => row.id}
@@ -149,4 +142,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default Call;

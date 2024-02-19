@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
+import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 // @mui
 import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
@@ -11,51 +12,101 @@ import AddContact from './AddContact';
 
 // ----------------------------------------------------------------------
 
-const leadData = [
-  {
-    id: 1,
-    firstName: 'jonny',
-    lastName: 'Doe',
-    gender: 'male',
-    phoneNumber: '9981923587',
-    emailAddress: 'ap@samyotech.com',
-    action: 'Edit'
-  }
-];
 const Contact = () => {
   const [openAdd, setOpenAdd] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const leadData = [
+    {
+      id: 1,
+      firstName: 'jonny',
+      lastName: 'Doe',
+      company: "Samyotech",
+      country: "India",
+      phone: "566655",
+      email: "as@samyotech.com"
+    }
+  ];
+
   const columns = [
     {
       field: 'firstName',
-      headerName: 'First Name',
+      headerName: 'Firstname',
       flex: 1,
       cellClassName: 'name-column--cell name-column--cell--capitalize'
     },
     {
       field: 'lastName',
-      headerName: 'Last Name',
+      headerName: 'Lastname',
       flex: 1,
       cellClassName: 'name-column--cell--capitalize'
     },
     {
-      field: 'gender',
-      headerName: 'Gender',
+      field: 'company',
+      headerName: 'Company',
       flex: 1
     },
     {
-      field: 'phoneNumber',
-      headerName: 'Phone Number',
+      field: 'country',
+      headerName: 'Country',
       flex: 1
     },
     {
-      field: 'emailAddress',
-      headerName: 'Email Address',
+      field: 'phone',
+      headerName: 'Phone',
+      flex: 1
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
       flex: 1
     },
     {
       field: 'action',
       headerName: 'Action',
-      flex: 1
+      flex: 1,
+      renderCell: () => {
+        return (
+          <>
+
+            <Button onClick={() => {
+              handleOpen()
+            }} variant='contained' color='inherit'>
+              ...
+            </Button>
+            {
+              open ? <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Text in a modal
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                  </Typography>
+                </Box>
+              </Modal> : null
+            }
+          </>
+
+        );
+      }
       // eslint-disable-next-line arrow-body-style
     }
   ];
@@ -67,10 +118,10 @@ const Contact = () => {
       <AddContact open={openAdd} handleClose={handleCloseAdd} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Contact-Management</Typography>
+          <Typography variant="h4">People List</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
-              New Contact
+              Add New Person
             </Button>
           </Stack>
         </Stack>

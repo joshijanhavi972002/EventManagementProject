@@ -2,29 +2,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
 // @mui
-import { Stack, Button, Container, Typography, Card, Box } from '@mui/material';
-import TableStyle from '../../ui-component/TableStyle';
+import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 import Iconify from '../../ui-component/iconify';
-import AddTask from './AddTask';
+import TableStyle from '../../ui-component/TableStyle';
+import AddLead from './AddLead.js';
 import Modal from '@mui/material/Modal';
 
 // ----------------------------------------------------------------------
 
-const policyData = [
+const leadData = [
   {
     id: 1,
-    type: "People",
-    name: "Aman",
-    status: "New",
-    source: "Website",
-    country: "In India",
-    phone: "56656654654",
-    email: "admin@gmail.com"
+    type: 'People',
+    name: 'Aman Kushwah',
+    country: "India",
+    phone: "7974392752",
+    email: "reachaman.k@gmail.com"
   }
 ];
-const Task = () => {
+
+const Lead = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -40,6 +39,7 @@ const Task = () => {
     boxShadow: 24,
     p: 4,
   };
+
   const columns = [
     {
       field: 'type',
@@ -52,16 +52,6 @@ const Task = () => {
       headerName: 'Name',
       flex: 1,
       cellClassName: 'name-column--cell--capitalize'
-    },
-    {
-      field: 'status',
-      headerName: 'Status',
-      flex: 1
-    },
-    {
-      field: 'source',
-      headerName: 'Source',
-      flex: 1
     },
     {
       field: 'country',
@@ -88,8 +78,8 @@ const Task = () => {
 
             <Button onClick={() => {
               handleOpen()
-            }} variant='contained' color='inherit'>
-              ...
+            }} variant='contained' color='info'>
+              v
             </Button>
             {
               open ? <Modal
@@ -120,13 +110,13 @@ const Task = () => {
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <AddTask open={openAdd} handleClose={handleCloseAdd} />
+      <AddLead open={openAdd} handleClose={handleCloseAdd} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Lead List</Typography>
+          <Typography variant="h4">Client</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
-              Add New Lead
+              Add New Client
             </Button>
           </Stack>
         </Stack>
@@ -134,7 +124,7 @@ const Task = () => {
           <Box width="100%">
             <Card style={{ height: '600px', paddingTop: '15px' }}>
               <DataGrid
-                rows={policyData}
+                rows={leadData}
                 columns={columns}
                 checkboxSelection
                 getRowId={(row) => row.id}
@@ -149,4 +139,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default Lead;

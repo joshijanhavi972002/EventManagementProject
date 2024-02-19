@@ -92,7 +92,7 @@ const Income = ({ isLoading }) => {
                   <Typography sx={{ marginTop: 1, color: "white" }} variant='h4'>This Month</Typography>
                 </Grid>
                 <Grid item xs={4}>
-                  <Typography sx={{ marginTop: 1, color: "white" }} variant='h4'>$96000.00</Typography>
+                  <Typography sx={{ marginTop: 1, color: "white" }} variant='h4'>$9600.00</Typography>
                 </Grid>
               </Grid>
             </Grid>

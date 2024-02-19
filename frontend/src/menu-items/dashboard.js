@@ -60,67 +60,133 @@ const dashboard = {
     },
     {
       id: '03',
-      title: 'Policy Management',
+      title: 'Company',
       type: 'item',
-      url: '/dashboard/policy',
+      url: '/dashboard/company',
       icon: icons.IconNotebook,
       breadcrumbs: false
     },
     {
       id: '04',
-      title: 'Tasks',
+      title: 'Lead',
       type: 'item',
-      url: '/dashboard/task',
+      url: '/dashboard/lead',
       icon: icons.IconChecklist,
       breadcrumbs: false
     },
     {
       id: '05',
-      title: 'Meeting',
+      title: 'Offer',
       type: 'item',
-      url: '/dashboard/meeting',
+      url: '/dashboard/offer',
       icon: icons.IconUsers,
       breadcrumbs: false
     },
     {
       id: '06',
-      title: 'Calls',
+      title: 'Invoice',
       type: 'item',
-      url: '/dashboard/call',
+      url: '/dashboard/invoice',
       icon: icons.IconPhoneCall,
       breadcrumbs: false
     },
     {
       id: '07',
-      title: 'Emails',
+      title: 'Quote',
       type: 'item',
-      url: '/dashboard/email',
+      url: '/dashboard/quote',
       icon: icons.IconMail,
       breadcrumbs: false
     },
     {
       id: '08',
-      title: 'Calender',
+      title: 'Payment',
       type: 'item',
-      url: '/dashboard/calender',
+      url: '/dashboard/payment',
       icon: icons.IconCalendarEvent,
       breadcrumbs: false
     },
     {
       id: '09',
-      title: 'Document Management',
+      title: 'Expense',
       type: 'item',
-      url: '/dashboard/document',
+      url: '/dashboard/expense',
       icon: icons.IconFileUpload,
       breadcrumbs: false
     },
     {
       id: '10',
-      title: 'Email Template',
+      title: 'Product',
       type: 'item',
-      url: '/dashboard/emailtemplate',
+      url: '/dashboard/product',
       icon: icons.IconFileInvoice,
       breadcrumbs: false
+    },
+    {
+      id: '11',
+      title: 'Product Category',
+      type: 'item',
+      url: '/dashboard/product-category',
+      icon: icons.IconFileInvoice,
+      breadcrumbs: false
+    },
+    {
+      id: '12',
+      title: 'Settings',
+      type: 'collapse',
+      url: '/dashboard/settings',
+      icon: icons.IconFileInvoice,
+      breadcrumbs: false,
+      children: [
+        {
+          id: '01',
+          title: 'Admin',
+          type: 'item',
+          url: '/dashboard/settings/admin',
+          icon: icons.IconUserCircle,
+          breadcrumbs: false
+        },
+        {
+          id: '02',
+          title: 'General Settings',
+          type: 'item',
+          url: '/dashboard/settings/general-settings',
+          icon: icons.IconGear,
+          breadcrumbs: false
+        },
+        {
+          id: '03',
+          title: 'Expenses Category',
+          type: 'item',
+          url: '/dashboard/settings/expenses-category',
+          icon: icons.IconGear,
+          breadcrumbs: false
+        },
+        {
+          id: '04',
+          title: 'Payment Mode',
+          type: 'item',
+          url: '/dashboard/settings/payment-mode',
+          icon: icons.IconGear,
+          breadcrumbs: false
+        },
+        {
+          id: '05',
+          title: 'Tax',
+          type: 'item',
+          url: '/dashboard/settings/tax',
+          icon: icons.IconGear,
+          breadcrumbs: false
+        },
+        {
+          id: '06',
+          title: 'About',
+          type: 'item',
+          url: '/dashboard/settings/about',
+          icon: icons.IconInfo,
+          breadcrumbs: false
+        }
+      ]
     }
   ]
 };
