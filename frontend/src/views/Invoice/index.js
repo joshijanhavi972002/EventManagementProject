@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Stack, Button, Container, Typography, Card, Box } from '@mui/material';
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
 import Iconify from '../../ui-component/iconify';
-import AddTask from './AddTask';
+
+import AddPolicy from './AddPolicy';
 import Modal from '@mui/material/Modal';
 
 // ----------------------------------------------------------------------
@@ -15,16 +15,18 @@ import Modal from '@mui/material/Modal';
 const policyData = [
   {
     id: 1,
-    type: "People",
-    name: "Aman",
-    status: "New",
-    source: "Website",
-    country: "In India",
-    phone: "56656654654",
-    email: "admin@gmail.com"
+    number: '62',
+    client: 'Max Mustermann',
+    date: '15/02/2024',
+    expiredDate: '15/03/2024',
+    total: '$ 87.63',
+    credit: "$ 0.00",
+    status: "Draft",
+    payment: "Unpaid",
+    createdBy: "admin"
   }
 ];
-const Task = () => {
+const PolicyManagement = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -42,16 +44,36 @@ const Task = () => {
   };
   const columns = [
     {
-      field: 'type',
-      headerName: 'Type',
+      field: 'number',
+      headerName: 'Number',
       flex: 1,
       cellClassName: 'name-column--cell name-column--cell--capitalize'
     },
     {
-      field: 'name',
-      headerName: 'Name',
+      field: 'client',
+      headerName: 'Client',
       flex: 1,
       cellClassName: 'name-column--cell--capitalize'
+    },
+    {
+      field: 'date',
+      headerName: 'Date',
+      flex: 1
+    },
+    {
+      field: 'expiredDate',
+      headerName: 'Expired Date',
+      flex: 1
+    },
+    {
+      field: 'total',
+      headerName: 'Total',
+      flex: 1
+    },
+    {
+      field: 'credit',
+      headerName: 'Credit',
+      flex: 1
     },
     {
       field: 'status',
@@ -59,23 +81,13 @@ const Task = () => {
       flex: 1
     },
     {
-      field: 'source',
-      headerName: 'Source',
+      field: 'payment',
+      headerName: 'Payment',
       flex: 1
     },
     {
-      field: 'country',
-      headerName: 'Country',
-      flex: 1
-    },
-    {
-      field: 'phone',
-      headerName: 'Phone',
-      flex: 1
-    },
-    {
-      field: 'email',
-      headerName: 'Email',
+      field: 'createdBy',
+      headerName: 'Created By',
       flex: 1
     },
     {
@@ -114,19 +126,19 @@ const Task = () => {
       }
       // eslint-disable-next-line arrow-body-style
     }
-  ];
 
+  ];
   const handleOpenAdd = () => setOpenAdd(true);
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <AddTask open={openAdd} handleClose={handleCloseAdd} />
+      <AddPolicy open={openAdd} handleClose={handleCloseAdd} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Lead List</Typography>
+          <Typography variant="h4">Invoice List</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
-              Add New Lead
+              Add New Policy
             </Button>
           </Stack>
         </Stack>
@@ -149,4 +161,4 @@ const Task = () => {
   );
 };
 
-export default Task;
+export default PolicyManagement;
