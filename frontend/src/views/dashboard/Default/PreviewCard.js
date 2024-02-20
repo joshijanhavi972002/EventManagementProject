@@ -28,7 +28,7 @@ function PreviewCard() {
             <div style={{ display: 'flex', justifyContent: "center", alignItems: "center", margin: "10px", padding: "10px" }} >
                 <Grid container xs={12} spacing={3} className="whiteBox shadow" elevation={3}>
                     <Grid item xs={4}>
-                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "10px " }} variant="h5">Invoices Preview</Typography>
+                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "30px " }} variant="h5">Invoices Preview</Typography>
 
 
 
@@ -46,7 +46,7 @@ function PreviewCard() {
                         <LinearProgressWithLabel value={21} />
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "10px " }} variant="h5">Quotes Preview</Typography>
+                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "30px " }} variant="h5">Quotes Preview</Typography>
                         <Typography variant="p">Draft</Typography>
                         <LinearProgressWithLabel value={60} />
                         <Typography variant="p">Pending</Typography>
@@ -61,7 +61,7 @@ function PreviewCard() {
                         <LinearProgressWithLabel value={21} />
                     </Grid>
                     <Grid item xs={4}>
-                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "10px " }} variant="h5">Offers Preview</Typography>
+                        <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} sx={{ marginBottom: "30px " }} variant="h5">Offers Preview</Typography>
                         <Typography variant="p">Draft</Typography>
                         <LinearProgressWithLabel value={60} />
                         <Typography variant="p">Pending</Typography>

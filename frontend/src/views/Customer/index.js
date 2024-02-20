@@ -1,15 +1,25 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState } from 'react';
+import * as React from 'react';
 // @mui
 import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 import Iconify from '../../ui-component/iconify';
 import TableStyle from '../../ui-component/TableStyle';
-import AddLead from './AddLead.js';
 import Modal from '@mui/material/Modal';
-
+import AddClient from './AddClient';
+import CustomerDrawer from './CustomerDrawer';
+import Popover from '@mui/material/Popover';
+import { AiOutlineEye } from "react-icons/ai";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 // ----------------------------------------------------------------------
 
 const leadData = [
@@ -23,22 +33,25 @@ const leadData = [
   }
 ];
 
-const Lead = () => {
+const Customer = () => {
   const [openAdd, setOpenAdd] = useState(false);
+  const [mode, setMode] = useState('');
+  const [rowData, setRowData] = useState()
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
+
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [customerName, setCustomerName] = useState('');
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
   };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
 
   const columns = [
     {
@@ -72,7 +85,8 @@ const Lead = () => {
       field: 'action',
       headerName: 'Action',
       flex: 1,
-      renderCell: () => {
+      renderCell: (params) => {
+        console.log(params);
         return (
           <>
 
@@ -82,21 +96,21 @@ const Lead = () => {
               v
             </Button>
             {
-              open ? <Modal
+              open ? <Popover
+                id={params.row?.id}
                 open={open}
+                anchorEl={open}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                anchorOrigin={{
+                  vertical: 'center',
+                  horizontal: 'right',
+                }}
               >
-                <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                  </Typography>
-                </Box>
-              </Modal> : null
+                <Typography id="show" onClick={() => { handleOpenAdd(); handleClose(); setMode('show'); setRowData(params.row) }} sx={{ p: 1, cursor: "pointer" }}><AiOutlineEye /> Show</Typography>
+                <Typography id="edit" onClick={() => { handleOpenAdd(); handleClose(); setMode('edit') }} sx={{ p: 1, cursor: "pointer" }} ><AiTwotoneEdit /> Edit</Typography>
+                <Typography id="delete" onClick={() => { setCustomerName(params.row.name); handleClose(); handleClickOpen() }} sx={{ p: 1, cursor: "pointer" }}><AiOutlineDelete /> Delete</Typography>
+
+              </Popover> : null
             }
           </>
 
@@ -110,12 +124,13 @@ const Lead = () => {
   const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <AddLead open={openAdd} handleClose={handleCloseAdd} />
+      {/* <AddClient open={openAdd} handleClose={handleCloseAdd} /> */}
+      <CustomerDrawer open={openAdd} handleClose={handleCloseAdd} mode={mode} data={rowData} />
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h4">Client</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
-            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
+            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={() => { setMode('add'); handleOpenAdd() }}>
               Add New Client
             </Button>
           </Stack>
@@ -135,8 +150,29 @@ const Lead = () => {
           </Box>
         </TableStyle>
       </Container>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle variant='h3' id="alert-dialog-title">
+          Delete Confirmation
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to delete : {customerName}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant='outlined' onClick={handleCloseDialog}>Cancel</Button>
+          <Button variant='contained' onClick={handleCloseDialog} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
-export default Lead;
+export default Customer;

@@ -1,32 +1,18 @@
-// assets
-import {
-  IconHome,
-  IconCalendarEvent,
-  IconMail,
-  IconFileUpload,
-  IconFileInvoice,
-  IconPhoneCall,
-  IconAntennaBars5,
-  IconChecklist,
-  IconNotebook,
-  IconPhoneCheck,
-  IconUsers
-} from '@tabler/icons';
 
-// constant
-const icons = {
-  IconHome,
-  IconCalendarEvent,
-  IconMail,
-  IconFileUpload,
-  IconFileInvoice,
-  IconPhoneCall,
-  IconAntennaBars5,
-  IconChecklist,
-  IconNotebook,
-  IconPhoneCheck,
-  IconUsers
-};
+import { AiOutlineDashboard } from "react-icons/ai";
+import { AiOutlineCustomerService } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineBank } from "react-icons/ai";
+import { AiOutlineFilter } from "react-icons/ai";
+import { AiOutlineFile } from "react-icons/ai";
+import { AiOutlineContainer } from "react-icons/ai";
+import { AiOutlineFileSync } from "react-icons/ai";
+import { AiOutlineCreditCard } from "react-icons/ai";
+import { AiOutlineWallet } from "react-icons/ai";
+import { AiOutlineTag } from "react-icons/ai";
+import { AiOutlineTags } from "react-icons/ai";
+import { CiSettings } from "react-icons/ci";
+
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -39,7 +25,7 @@ const dashboard = {
       title: 'Dashboard',
       type: 'item',
       url: '/dashboard/default',
-      icon: icons.IconHome,
+      icon: AiOutlineDashboard,
       breadcrumbs: false
     },
     {
@@ -47,7 +33,7 @@ const dashboard = {
       title: 'Customer',
       type: 'item',
       url: '/dashboard/customer',
-      icon: icons.IconAntennaBars5,
+      icon: AiOutlineCustomerService,
       breadcrumbs: false
     },
     {
@@ -55,7 +41,7 @@ const dashboard = {
       title: 'People',
       type: 'item',
       url: '/dashboard/people',
-      icon: icons.IconPhoneCheck,
+      icon: AiOutlineUser,
       breadcrumbs: false
     },
     {
@@ -63,7 +49,7 @@ const dashboard = {
       title: 'Company',
       type: 'item',
       url: '/dashboard/company',
-      icon: icons.IconNotebook,
+      icon: AiOutlineBank,
       breadcrumbs: false
     },
     {
@@ -71,7 +57,7 @@ const dashboard = {
       title: 'Lead',
       type: 'item',
       url: '/dashboard/lead',
-      icon: icons.IconChecklist,
+      icon: AiOutlineFilter,
       breadcrumbs: false
     },
     {
@@ -79,7 +65,7 @@ const dashboard = {
       title: 'Offer',
       type: 'item',
       url: '/dashboard/offer',
-      icon: icons.IconUsers,
+      icon: AiOutlineFile,
       breadcrumbs: false
     },
     {
@@ -87,7 +73,7 @@ const dashboard = {
       title: 'Invoice',
       type: 'item',
       url: '/dashboard/invoice',
-      icon: icons.IconPhoneCall,
+      icon: AiOutlineContainer,
       breadcrumbs: false
     },
     {
@@ -95,7 +81,7 @@ const dashboard = {
       title: 'Quote',
       type: 'item',
       url: '/dashboard/quote',
-      icon: icons.IconMail,
+      icon: AiOutlineFileSync,
       breadcrumbs: false
     },
     {
@@ -103,7 +89,7 @@ const dashboard = {
       title: 'Payment',
       type: 'item',
       url: '/dashboard/payment',
-      icon: icons.IconCalendarEvent,
+      icon: AiOutlineCreditCard,
       breadcrumbs: false
     },
     {
@@ -111,7 +97,7 @@ const dashboard = {
       title: 'Expense',
       type: 'item',
       url: '/dashboard/expense',
-      icon: icons.IconFileUpload,
+      icon: AiOutlineWallet,
       breadcrumbs: false
     },
     {
@@ -119,7 +105,7 @@ const dashboard = {
       title: 'Product',
       type: 'item',
       url: '/dashboard/product',
-      icon: icons.IconFileInvoice,
+      icon: AiOutlineTag,
       breadcrumbs: false
     },
     {
@@ -127,7 +113,7 @@ const dashboard = {
       title: 'Product Category',
       type: 'item',
       url: '/dashboard/product-category',
-      icon: icons.IconFileInvoice,
+      icon: AiOutlineTags,
       breadcrumbs: false
     },
     {
@@ -135,7 +121,7 @@ const dashboard = {
       title: 'Settings',
       type: 'collapse',
       url: '/dashboard/settings',
-      icon: icons.IconFileInvoice,
+      icon: CiSettings,
       breadcrumbs: false,
       children: [
         {
@@ -143,7 +129,6 @@ const dashboard = {
           title: 'Admin',
           type: 'item',
           url: '/dashboard/settings/admin',
-          icon: icons.IconUserCircle,
           breadcrumbs: false
         },
         {
@@ -151,7 +136,6 @@ const dashboard = {
           title: 'General Settings',
           type: 'item',
           url: '/dashboard/settings/general-settings',
-          icon: icons.IconGear,
           breadcrumbs: false
         },
         {
@@ -159,7 +143,6 @@ const dashboard = {
           title: 'Expenses Category',
           type: 'item',
           url: '/dashboard/settings/expenses-category',
-          icon: icons.IconGear,
           breadcrumbs: false
         },
         {
@@ -167,7 +150,6 @@ const dashboard = {
           title: 'Payment Mode',
           type: 'item',
           url: '/dashboard/settings/payment-mode',
-          icon: icons.IconGear,
           breadcrumbs: false
         },
         {
@@ -175,7 +157,6 @@ const dashboard = {
           title: 'Tax',
           type: 'item',
           url: '/dashboard/settings/tax',
-          icon: icons.IconGear,
           breadcrumbs: false
         },
         {
@@ -183,7 +164,6 @@ const dashboard = {
           title: 'About',
           type: 'item',
           url: '/dashboard/settings/about',
-          icon: icons.IconInfo,
           breadcrumbs: false
         }
       ]

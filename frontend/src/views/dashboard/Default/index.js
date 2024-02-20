@@ -55,13 +55,13 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={gridSpacing}>
-          <Grid item xs={12} md={9}>
+      <Grid item xs={12}  >
+        <Grid container spacing={gridSpacing} style={{ objectFit: "contain" }}>
+          <Grid item xs={12} md={12} lg={9} >
             {/* <TotalGrowthBarChart isLoading={isLoading} /> */}
             <PreviewCard />
           </Grid>
-          <Grid item xs={12} md={3} spacing={gridSpacing}>
+          <Grid item xs={12} md={12} lg={3} spacing={gridSpacing}>
             <CustomerPreviewCard
               isLoading={clientLoading}
               activeCustomer={clientResult?.active}

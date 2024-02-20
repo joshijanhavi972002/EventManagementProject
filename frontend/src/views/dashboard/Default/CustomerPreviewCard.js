@@ -1,7 +1,9 @@
 import React from 'react';
-import { Grid, Paper, Typography, CircularProgress, LinearProgress, Divider } from '@mui/material';
+import { Grid, Paper, Typography, CircularProgress, LinearProgress, Divider, Card } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { useEffect } from 'react';
+import ApexCharts from 'apexcharts';
 
 export default function CustomerPreviewCard({
   isLoading = false,
@@ -10,59 +12,108 @@ export default function CustomerPreviewCard({
 }) {
 
 
+  useEffect(() => {
+    const options = {
+      series: [newCustomer],
+      chart: {
+        height: 250,
+        type: 'radialBar',
+        toolbar: {
+          show: true,
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -135,
+          endAngle: 225,
+          hollow: {
+            margin: 0,
+            size: '70%',
+            background: '#fff',
+            image: undefined,
+            imageOffsetX: 0,
+            imageOffsetY: 0,
+            position: 'front',
+            dropShadow: {
+              enabled: true,
+              top: 3,
+              left: 0,
+              blur: 4,
+              opacity: 0.24,
+            },
+          },
+          track: {
+            background: '#fff',
+            strokeWidth: '67%',
+            margin: 0,
+            dropShadow: {
+              enabled: true,
+              top: -3,
+              left: 0,
+              blur: 4,
+              opacity: 0.35,
+            },
+          },
+          dataLabels: {
+            show: true,
+            name: {
+              offsetY: -10,
+              show: true,
+              color: '#888',
+              fontSize: '17px',
+            },
+            value: {
+              formatter: function (val) {
+                return parseInt(val);
+              },
+              color: '#111',
+              fontSize: '36px',
+              show: true,
+            },
+          },
+        },
+      },
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          type: 'horizontal',
+          shadeIntensity: 0.5,
+          gradientToColors: ['#ABE5A1'],
+          inverseColors: true,
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100],
+        },
+      },
+      stroke: {
+        lineCap: 'round',
+      },
+      labels: ['Percent'],
+    };
+
+    const chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
+    // Cleanup function
+    return () => {
+      chart.destroy();
+    };
+  }, [])
+
+
   return (
-    <Grid container className="gutter-row">
-      <Paper elevation={3} className="whiteBox shadow">
-        <div
-          className="pad20"
-          style={{
-            textAlign: 'center',
-            justifyContent: 'center',
-
-          }}
-        >
-          <Typography variant="h5" style={{ color: '#22075e', marginTop: "16px" }} >
-            {('Customer Preview')}
-          </Typography>
-
-          {isLoading ? (
-            <CircularProgress />
-          ) : (
-            <div style={{ display: 'grid', justifyContent: 'center' }}>
-              <LinearProgress
-                variant="determinate"
-                value={newCustomer}
-                sx={{
-                  height: '135px',
-                  width: '220px',
-                  borderRadius: '50%',
-                  color: '#1890ff', // Customize the color as needed
-                  margin: '10px',
-                  padding: '10px',
-                }}
-              />
-              <Typography variant="body1" style={{ marginTop: 10 }}>
-                {(`New Customer this Month: ${newCustomer}`)}
-              </Typography>
-              <Divider sx={{ marginY: 2 }} />
-              <Typography variant="h6">
-                {('Active Customer')}
-              </Typography>
-              {/* <Typography variant="h4" color={activeCustomer > 0 ? 'success.dark' : activeCustomer < 0 ? 'error.dark' : 'text.primary'}>
-                {activeCustomer}
-              </Typography> */}
-              <Typography sx={{ display: "flex", justifyContent: "center" }} variant="subtitle1" color={activeCustomer > 0 ? 'success.dark' : activeCustomer < 0 ? 'error.dark' : 'text.primary'}>
-                {activeCustomer > 0 ? (
-                  <ArrowUpwardIcon />
-                ) : activeCustomer < 0 ? (
-                  <ArrowDownwardIcon />
-                ) : null}
-                {activeCustomer > 0 ? `${activeCustomer}%` : null}
-              </Typography>
-            </div>
-          )}
+    <Card  >
+      <Grid container className="gutter-row whiteBox shadow" elevation={3} style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+        <div id="chart" style={{ display: 'flex', justifyContent: "center", alignItems: "center" }}>
+          {/* Chart will be rendered here */}
         </div>
-      </Paper>
-    </Grid >
+      </Grid >
+      <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center" }} variant='h5'>New Customer This Month</Typography>
+      <Divider style={{ margin: "10px" }} orientation="horizontal" />
+      <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center", margin: "10px" }} variant='h5'>Active Customer</Typography>
+      <Typography style={{ display: 'flex', justifyContent: "center", alignItems: "center", margin: "10px", color: "green" }} variant='h5'>{activeCustomer > 0 ? <ArrowUpwardIcon /> : <ArrowDownwardIcon />} {activeCustomer}.00</Typography>
+
+    </Card >
   );
 }
