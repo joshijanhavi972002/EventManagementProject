@@ -8,8 +8,6 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 
 import Iconify from '../../ui-component/iconify';
 import TableStyle from '../../ui-component/TableStyle';
-import Modal from '@mui/material/Modal';
-import AddClient from './AddClient';
 import CustomerDrawer from './CustomerDrawer';
 import Popover from '@mui/material/Popover';
 import { AiOutlineEye } from "react-icons/ai";
@@ -37,17 +35,27 @@ const Customer = () => {
   const [openAdd, setOpenAdd] = useState(false);
   const [mode, setMode] = useState('');
   const [rowData, setRowData] = useState()
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+
+
 
   const [openDialog, setOpenDialog] = React.useState(false);
   const [customerName, setCustomerName] = useState('');
-
   const handleClickOpen = () => {
     setOpenDialog(true);
   };
-
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
@@ -90,20 +98,18 @@ const Customer = () => {
         return (
           <>
 
-            <Button onClick={() => {
-              handleOpen()
-            }} variant='contained' color='info'>
-              v
+            <Button aria-describedby={id} onClick={handleClick} variant='text' color='info'>
+              ....
             </Button>
             {
               open ? <Popover
-                id={params.row?.id}
+                id={id}
                 open={open}
-                anchorEl={open}
+                anchorEl={anchorEl}
                 onClose={handleClose}
                 anchorOrigin={{
-                  vertical: 'center',
-                  horizontal: 'right',
+                  vertical: 'bottom',
+                  horizontal: 'left',
                 }}
               >
                 <Typography id="show" onClick={() => { handleOpenAdd(); handleClose(); setMode('show'); setRowData(params.row) }} sx={{ p: 1, cursor: "pointer" }}><AiOutlineEye /> Show</Typography>
