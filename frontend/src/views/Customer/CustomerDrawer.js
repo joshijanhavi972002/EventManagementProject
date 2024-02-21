@@ -116,7 +116,7 @@ export default function CustomerDrawer(props) {
                                 </FormControl>
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
-                                <Button variant='contained' type='submit' style={{ margin: "10px" }}>Save</Button>
+                                <Button variant='contained' type='submit' style={{ margin: "10px" }}>Submit</Button>
                             </Grid>
                         </form> : null}
                         {mode === "edit" ? <form>
@@ -168,6 +168,8 @@ export default function CustomerDrawer(props) {
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                 <Button variant='contained' type='submit' style={{ margin: "10px" }}>Save</Button>
+                                <Button variant='outlined' type='submit' style={{ margin: "10px" }}>Cancel</Button>
+
                             </Grid>
                         </form> : null}
                     </Drawer>

@@ -7,7 +7,6 @@ import { Stack, Button, Container, Typography, Box, Card } from '@mui/material';
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import Iconify from '../../ui-component/iconify';
-import AddContact from './AddContact';
 import Popover from '@mui/material/Popover';
 import { AiOutlineEye } from "react-icons/ai";
 import { AiTwotoneEdit } from "react-icons/ai";

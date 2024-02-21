@@ -1,14 +1,23 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
+import * as React from 'react';
 import { useState } from 'react';
 // @mui
-import { Stack, Button, Container, Typography, Card, Box } from '@mui/material';
+import { Stack, Button, Container, Typography, Card, Box, Divider } from '@mui/material';
 import TableStyle from '../../ui-component/TableStyle';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-
 import Iconify from '../../ui-component/iconify';
-import AddEmails from './Addemail';
-import Modal from '@mui/material/Modal';
+import Popover from '@mui/material/Popover';
+import { AiOutlineEye } from "react-icons/ai";
+import { AiTwotoneEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineFilePdf } from "react-icons/ai";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router';
 // ----------------------------------------------------------------------
 
 const emailData = [
@@ -23,22 +32,34 @@ const emailData = [
     status: "Sent"
   }
 ];
-const Emails = () => {
-  const [openAdd, setOpenAdd] = useState(false);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
+const Quote = () => {
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [quoteName, setQuoteName] = useState('');
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleShowComponent = (id) => {
+    navigate(`/dashboard/quote/read/${id}`);
+  }
+  const handleUpdateComponent = (id) => {
+    navigate(`/dashboard/quote/update/${id}`);
+  }
+  const handleDownloadComponent = (id) => {
+    alert(`Download ${id}`);
+  }
   const columns = [
     {
       field: 'number',
@@ -81,31 +102,30 @@ const Emails = () => {
       field: 'action',
       headerName: 'Action',
       flex: 1,
-      renderCell: () => {
+      renderCell: (params) => {
         return (
           <>
 
-            <Button onClick={() => {
-              handleOpen()
-            }} variant='contained' color='inherit'>
+            <Button aria-describedby={id} onClick={handleClick} variant='text' color='info'>
               ...
             </Button>
             {
-              open ? <Modal
+              open ? <Popover
+                id={id}
                 open={open}
+                anchorEl={anchorEl}
                 onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
               >
-                <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                  </Typography>
-                </Box>
-              </Modal> : null
+                <Typography id="show" onClick={() => { handleClose(); handleShowComponent(params.row.id) }} sx={{ p: 1, cursor: "pointer" }}><AiOutlineEye /> Show</Typography>
+                <Typography id="edit" onClick={() => { handleClose(); handleUpdateComponent(params.row.id) }} sx={{ p: 1, cursor: "pointer" }} ><AiTwotoneEdit /> Edit</Typography>
+                <Typography id="download" onClick={() => { handleClose(); handleDownloadComponent(params.row.id) }} sx={{ p: 1, cursor: "pointer" }} ><AiOutlineFilePdf /> Download</Typography>
+                <Divider orientation='horizontal' />
+                <Typography id="delete" onClick={() => { setQuoteName(params.row.client); handleClose(); handleClickOpen() }} sx={{ p: 1, cursor: "pointer" }}><AiOutlineDelete /> Delete</Typography>
+              </Popover> : null
             }
           </>
 
@@ -114,16 +134,16 @@ const Emails = () => {
       // eslint-disable-next-line arrow-body-style
     }
   ];
-  const handleOpenAdd = () => setOpenAdd(true);
-  const handleCloseAdd = () => setOpenAdd(false);
   return (
     <>
-      <AddEmails open={openAdd} handleClose={handleCloseAdd} s />
+
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
           <Typography variant="h4">Quote List</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
-            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenAdd}>
+            <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={() => {
+              navigate('/dashboard/quote/create');
+            }}>
               Add New Quote
             </Button>
           </Stack>
@@ -143,8 +163,28 @@ const Emails = () => {
           </Box>
         </TableStyle>
       </Container>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle variant='h3' id="alert-dialog-title">
+          Remove Item        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want delete : {quoteName}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant='outlined' onClick={handleCloseDialog}>Cancel</Button>
+          <Button variant='contained' onClick={handleCloseDialog} autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
 
-export default Emails;
+export default Quote;

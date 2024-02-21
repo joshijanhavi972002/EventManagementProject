@@ -2,11 +2,12 @@ import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import ClearIcon from '@mui/icons-material/Clear';
 import Grid from '@mui/material/Grid';
-import { Button, Divider, Select, MenuItem, Typography, FormControl, FormLabel, TextField } from '@mui/material';
+import { Button, Divider, Select, MenuItem, Typography, FormControl, FormLabel, TextField, TextareaAutosize } from '@mui/material';
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
+import InputAdornment from '@mui/material/InputAdornment';
 
-export default function PeopleDrawer(props) {
+export default function ProductDrawer(props) {
     const { open, handleClose, mode, data } = props;
     console.log("Mode", mode);
 
@@ -22,7 +23,7 @@ export default function PeopleDrawer(props) {
                     >
                         <Grid style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '10px' }}>
                             <ClearIcon onClick={handleClose} style={{ cursor: 'pointer' }} />
-                            <Typography variant='h3' style={{ marginLeft: '10px' }}> Person </Typography>
+                            <Typography variant='h3' style={{ marginLeft: '10px' }}> Product </Typography>
                         </Grid>
                         <Divider orientation='horizontal' style={{ marginTop: '10px' }} />
                         <Grid style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '15px', padding: "5px" }}>
@@ -42,37 +43,36 @@ export default function PeopleDrawer(props) {
                             <Button variant='outlined' style={{ margin: "10px" }}>+</Button>
                         </Grid>
                         {mode === "show" ? <Grid style={{ display: "flex", justifyContent: "space-between", width: "100%", marginTop: '15px', padding: "5px" }}>
-                            <Typography variant='h5' style={{ margin: "10px", paddingTop: "6px" }}> {data.firstName} {data.lastName} </Typography>
+                            <Typography variant='h5' style={{ margin: "10px", paddingTop: "6px" }}> {data.name}</Typography>
                             <Button variant='text' style={{ margin: "10px" }}><AiTwotoneEdit style={{ margin: "5px" }} /> Edit</Button>
                             <Button variant='text' style={{ margin: "10px" }}><AiOutlineDelete style={{ margin: "5px" }} /> Remove</Button>
                         </Grid> : null}
                         <Divider orientation='horizontal' style={{ marginTop: '10px' }} />
-                        {mode === "show" ? <> <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                            <Typography variant='h5' style={{ margin: "10px" }}>firstname: {data.firstName}</Typography>
-                        </Grid>
+                        {mode === "show" ? <>
                             <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                                <Typography variant='h5' style={{ margin: "10px" }}>lastname:  {data.lastName}</Typography>
+                                <Typography variant='h5' style={{ margin: "10px" }}>name: {data.name}</Typography>
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                                <Typography variant='h5' style={{ margin: "10px" }}>company:  {data.company}</Typography>
+                                <Typography variant='h5' style={{ margin: "10px" }}>Product Category: {data.product_category}</Typography>
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                                <Typography variant='h5' style={{ margin: "10px" }}>country:  {data.country}</Typography>
+                                <Typography variant='h5' style={{ margin: "10px" }}>price:  {data.price}</Typography>
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                                <Typography variant='h5' style={{ margin: "10px" }}>phone:  {data.phone}</Typography>
+                                <Typography variant='h5' style={{ margin: "10px" }}>description:  {data.description}</Typography>
                             </Grid>
                             <Grid style={{ display: "flex", justifyContent: "center", width: "100%", }}>
-                                <Typography variant='h5' style={{ margin: "10px" }}>email:  {data.email}</Typography>
-                            </Grid> </> : null}
-                        <Button variant='outlined' style={{ margin: "10px" }} >ADD NEW PERSON</Button>
+                                <Typography variant='h5' style={{ margin: "10px" }}>ref:  {data.reference}</Typography>
+                            </Grid>
+                        </> : null}
+                        <Button variant='outlined' style={{ margin: "10px" }} >ADD NEW PRODUCT</Button>
                         {mode === "add" ?
                             <form>
-                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>First name</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Name</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="fristName"
-                                        name="firstName"
+                                        id="name"
+                                        name="name"
                                         label=""
                                         size="small"
                                         maxRows={10}
@@ -80,62 +80,52 @@ export default function PeopleDrawer(props) {
                                         required
                                     />
                                 </Grid>
-                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Last name</FormLabel>
-                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
-                                    <TextField
-                                        id="lastName"
-                                        name="lastName"
-                                        label=""
-                                        size="small"
-                                        maxRows={10}
-                                        fullWidth
-                                        required
-                                    />
-                                </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Company</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Product Category</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <FormControl fullWidth>
                                         <Select
-                                            id="company"
-                                            name="company"
+                                            id="expenseCategory"
+                                            name="expenseCategory"
                                             size="small"
                                             fullWidth
+                                            placeholder='Search Here'
                                         >
-                                            <MenuItem value="People">1</MenuItem>
-                                            <MenuItem value="Company">2</MenuItem>
+                                            <MenuItem value="Aeso">Aeso</MenuItem>
+                                            <MenuItem value="test">test</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Country</FormLabel>
-                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
-                                    <FormControl fullWidth >
-                                        <Select
-                                            id="country"
-                                            name="country"
-                                            size="small"
-                                            fullWidth
-                                        >
-                                            <MenuItem value="People">1</MenuItem>
-                                            <MenuItem value="Company">2</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Phone</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Price</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="phone"
-                                        name="phone"
+                                        id="price"
+                                        name="price"
+                                        label=""
+                                        size="small"
+                                        maxRows={10}
+                                        fullWidth
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                        }}
+                                        required
+                                    />
+                                </Grid>
+                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Description</FormLabel>
+                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
+                                    <TextField
+                                        id="description"
+                                        name="description"
                                         label=""
                                         size="small"
                                         maxRows={10}
                                         fullWidth
                                     />
                                 </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Email</FormLabel>
+                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Reference</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="email"
-                                        name="email"
+                                        id="reference"
+                                        name="reference"
                                         label=""
                                         size="small"
                                         maxRows={10}
@@ -148,11 +138,11 @@ export default function PeopleDrawer(props) {
                             </form> : null}
                         {mode === "edit" ?
                             <form>
-                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>First name</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Name</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="fristName"
-                                        name="firstName"
+                                        id="name"
+                                        name="name"
                                         label=""
                                         size="small"
                                         maxRows={10}
@@ -160,75 +150,52 @@ export default function PeopleDrawer(props) {
                                         required
                                     />
                                 </Grid>
-                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Last name</FormLabel>
-                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
-                                    {/* <FormControl fullWidth style={{ margin: "10px", width: "280px" }}>
-                               <FormLabel >People</FormLabel>
-
-                               <Select
-                                   id="people"
-                                   name="people"
-                                   size="small"
-                                   fullWidth
-                               >
-                                   <MenuItem value="People">1</MenuItem>
-                                   <MenuItem value="Company">2</MenuItem>
-                               </Select>
-                           </FormControl> */}
-                                    <TextField
-                                        id="lastName"
-                                        name="lastName"
-                                        label=""
-                                        size="small"
-                                        maxRows={10}
-                                        fullWidth
-                                        required
-                                    />
-                                </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Company</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Product Category</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <FormControl fullWidth>
                                         <Select
-                                            id="company"
-                                            name="company"
+                                            id="productCategory"
+                                            name="productCategory"
                                             size="small"
                                             fullWidth
+                                            placeholder='Search Here'
                                         >
-                                            <MenuItem value="People">1</MenuItem>
-                                            <MenuItem value="Company">2</MenuItem>
+                                            <MenuItem value="Aeso">Aeso</MenuItem>
+                                            <MenuItem value="test">test</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Country</FormLabel>
-                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
-                                    <FormControl fullWidth >
-                                        <Select
-                                            id="country"
-                                            name="country"
-                                            size="small"
-                                            fullWidth
-                                        >
-                                            <MenuItem value="People">1</MenuItem>
-                                            <MenuItem value="Company">2</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Phone</FormLabel>
+                                <FormLabel required style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Price</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="phone"
-                                        name="phone"
+                                        id="price"
+                                        name="price"
+                                        label=""
+                                        size="small"
+                                        maxRows={10}
+                                        fullWidth
+                                        InputProps={{
+                                            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+                                        }}
+                                        required
+                                    />
+                                </Grid>
+                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Description</FormLabel>
+                                <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
+                                    <TextField
+                                        id="description"
+                                        name="description"
                                         label=""
                                         size="small"
                                         maxRows={10}
                                         fullWidth
                                     />
                                 </Grid>
-                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Email</FormLabel>
+                                <FormLabel style={{ display: "flex", justifyContent: "start", width: "100%", marginTop: '5px', padding: "5px" }}>Reference</FormLabel>
                                 <Grid style={{ display: "flex", justifyContent: "start", width: "100%", padding: "5px" }}>
                                     <TextField
-                                        id="email"
-                                        name="email"
+                                        id="reference"
+                                        name="reference"
                                         label=""
                                         size="small"
                                         maxRows={10}

@@ -12,6 +12,22 @@ import Admin from 'views/Settings/Admin';
 import GeneralSettings from 'views/Settings/GeneralSettings/GeneralSettings';
 import ExpenseCategory from 'views/Settings/Expense-Category';
 import PaymentMode from 'views/Settings/Payment-Mode';
+import Offer from 'views/Offer';
+import CreateOffer from 'views/Offer/CreateOffer';
+import UpdateOffer from 'views/Offer/UpdateOffer';
+import CreateInvoice from 'views/Invoice/CreateInvoice';
+import ShowInvoice from 'views/Invoice/ShowInvoice';
+import Invoice from 'views/Invoice';
+import UpdateInvoice from 'views/Invoice/UpdateInvoice';
+import RecordInvoice from 'views/Invoice/RecordInvoice';
+import Quote from 'views/Quote';
+import CreateQuote from 'views/Quote/CreateQuote';
+import ShowQuote from 'views/Quote/ShowQuote';
+import UpdateQuote from 'views/Quote/UpdateQuote';
+import ShowPayment from 'views/Payment/ShowPayment';
+import UpdatePayment from 'views/Payment/UpdatePayment';
+import Lead from 'views/Lead';
+import Expense from 'views/Expense';
 
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
@@ -24,8 +40,9 @@ const Email = Loadable(lazy(() => import('views/Quote')));
 const Task = Loadable(lazy(() => import('views/Lead')));
 const EmailTemplates = Loadable(lazy(() => import('views/EmailTemplates')));
 const Document = Loadable(lazy(() => import('views/Expense')));
-const Calender = Loadable(lazy(() => import('views/Calender')));
 const AddTemplates = Loadable(lazy(() => import('views/EmailTemplates/AddTemplates')));
+
+const ShowOffer = Loadable(lazy(() => import('views/Offer/ShowOffer')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -78,7 +95,7 @@ const MainRoutes = {
       children: [
         {
           path: 'lead',
-          element: <Task />
+          element: <Lead />
         }
       ]
     },
@@ -87,7 +104,19 @@ const MainRoutes = {
       children: [
         {
           path: 'offer',
-          element: <Metting />
+          element: <Offer />,
+        },
+        {
+          path: 'offer/create',
+          element: <CreateOffer />
+        },
+        {
+          path: 'offer/read/:id',
+          element: <ShowOffer />
+        },
+        {
+          path: 'offer/update/:id',
+          element: <UpdateOffer />
         }
       ]
     },
@@ -96,7 +125,23 @@ const MainRoutes = {
       children: [
         {
           path: 'invoice',
-          element: <Policy />
+          element: <Invoice />
+        },
+        {
+          path: 'invoice/create',
+          element: <CreateInvoice />
+        },
+        {
+          path: 'invoice/read/:id',
+          element: <ShowInvoice />
+        },
+        {
+          path: "invoice/update/:id",
+          element: <UpdateInvoice />
+        },
+        {
+          path: "invoice/pay/:id",
+          element: <RecordInvoice />
         }
       ]
     },
@@ -105,7 +150,19 @@ const MainRoutes = {
       children: [
         {
           path: 'quote',
-          element: <Email />
+          element: <Quote />
+        },
+        {
+          path: 'quote/create',
+          element: <CreateQuote />
+        },
+        {
+          path: 'quote/read/:id',
+          element: <ShowQuote />
+        },
+        {
+          path: "quote/update/:id",
+          element: <UpdateQuote />
         }
       ]
     },
@@ -115,6 +172,14 @@ const MainRoutes = {
         {
           path: 'payment',
           element: <Payment />
+        },
+        {
+          path: "payment/read/:id",
+          element: <ShowPayment />
+        },
+        {
+          path: "payment/update/:id",
+          element: <UpdatePayment />
         }
       ]
     },
@@ -123,7 +188,7 @@ const MainRoutes = {
       children: [
         {
           path: 'expense',
-          element: <Document />
+          element: <Expense />
         }
       ]
     },
