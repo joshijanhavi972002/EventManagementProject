@@ -58,7 +58,7 @@ const Call = () => {
       field: 'name',
       headerName: 'Name',
       flex: 1,
-      cellClassName: 'name-column--cell name-column--cell--capitalize'
+      cellClassName: 'name-column--cell name-column--cell--capitalize',
     },
 
     {
