@@ -34,13 +34,7 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 const LeadManagement = Loadable(lazy(() => import('views/Customer')));
 const ContactManagement = Loadable(lazy(() => import('views/People')));
 const Call = Loadable(lazy(() => import('views/Company')));
-const Policy = Loadable(lazy(() => import('views/Invoice')));
-const Metting = Loadable(lazy(() => import('views/Offer')));
-const Email = Loadable(lazy(() => import('views/Quote')));
-const Task = Loadable(lazy(() => import('views/Lead')));
-const EmailTemplates = Loadable(lazy(() => import('views/EmailTemplates')));
-const Document = Loadable(lazy(() => import('views/Expense')));
-const AddTemplates = Loadable(lazy(() => import('views/EmailTemplates/AddTemplates')));
+
 
 const ShowOffer = Loadable(lazy(() => import('views/Offer/ShowOffer')));
 
