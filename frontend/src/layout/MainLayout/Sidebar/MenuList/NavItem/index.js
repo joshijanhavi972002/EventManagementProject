@@ -1,17 +1,19 @@
 import PropTypes from 'prop-types';
-import { forwardRef, useEffect } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material';
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery, Collapse, List } from '@mui/material';
 
 // project imports
 import { MENU_OPEN, SET_MENU } from 'store/actions';
 
 // assets
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { IconChevronDown, IconChevronUp } from '@tabler/icons';
 
 // ==============================|| SIDEBAR MENU LIST ITEMS ||============================== //
 
@@ -25,6 +27,7 @@ const NavItem = ({ item, level }) => {
   const Icon = item.icon;
   const itemIcon = item?.icon ? (
     <Icon stroke={1.5} size="1.3rem" />
+    // <></>
   ) : (
     <FiberManualRecordIcon
       sx={{
@@ -64,6 +67,12 @@ const NavItem = ({ item, level }) => {
     // eslint-disable-next-line
   }, [pathname]);
 
+  const [open, setOpen] = useState(false);
+
+  const handleDropdownClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <ListItemButton
       {...listItemProps}
@@ -79,29 +88,48 @@ const NavItem = ({ item, level }) => {
       selected={customization.isOpen.findIndex((id) => id === item.id) > -1}
       onClick={() => itemHandler(item.id)}
     >
-      <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} color="inherit">
-            {item.title}
-          </Typography>
-        }
-        secondary={
-          item.caption && (
-            <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
-              {item.caption}
-            </Typography>
-          )
-        }
-      />
-      {item.chip && (
-        <Chip
-          color={item.chip.color}
-          variant={item.chip.variant}
-          size={item.chip.size}
-          label={item.chip.label}
-          avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
-        />
+      {item.id === 'event-category' ? (
+        <>
+          {/* <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>
+            <AiOutlineCalendar stroke={1.5} size="1.3rem" />
+          </ListItemIcon>
+          <ListItemText
+            primary={<Typography variant="body1" color="inherit">Event Category</Typography>}
+            secondary={<Typography variant="caption">Dropdown menu for event categories</Typography>}
+          />
+          {open ? (
+            <IconChevronUp stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+          ) : (
+            <IconChevronDown stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+          )} */}
+        </>
+      ) : (
+        <>
+          <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
+          <ListItemText
+            primary={
+              <Typography variant={customization.isOpen.findIndex((id) => id === item.id) > -1 ? 'h5' : 'body1'} color="inherit">
+                {item.title}
+              </Typography>
+            }
+            secondary={
+              item.caption && (
+                <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
+                  {item.caption}
+                </Typography>
+              )
+            }
+          />
+          {item.chip && (
+            <Chip
+              color={item.chip.color}
+              variant={item.chip.variant}
+              size={item.chip.size}
+              label={item.chip.label}
+              avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
+            />
+          )}
+        </>
       )}
     </ListItemButton>
   );

@@ -3,40 +3,27 @@ import { lazy } from 'react';
 // project imports
 import MainLayout from 'layout/MainLayout';
 import Loadable from 'ui-component/Loadable';
-import Tax from 'views/Settings/Tax';
-import About from 'views/Settings/About';
-import Payment from 'views/Payment';
-import Products from 'views/Product';
-import ProductCategory from 'views/Product-Category';
-import Admin from 'views/Settings/Admin';
-import GeneralSettings from 'views/Settings/GeneralSettings/GeneralSettings';
-import ExpenseCategory from 'views/Settings/Expense-Category';
-import PaymentMode from 'views/Settings/Payment-Mode';
-import Offer from 'views/Offer';
-import CreateOffer from 'views/Offer/CreateOffer';
-import UpdateOffer from 'views/Offer/UpdateOffer';
-import CreateInvoice from 'views/Invoice/CreateInvoice';
-import ShowInvoice from 'views/Invoice/ShowInvoice';
-import Invoice from 'views/Invoice';
-import UpdateInvoice from 'views/Invoice/UpdateInvoice';
-import RecordInvoice from 'views/Invoice/RecordInvoice';
-import Quote from 'views/Quote';
-import CreateQuote from 'views/Quote/CreateQuote';
-import ShowQuote from 'views/Quote/ShowQuote';
-import UpdateQuote from 'views/Quote/UpdateQuote';
-import ShowPayment from 'views/Payment/ShowPayment';
-import UpdatePayment from 'views/Payment/UpdatePayment';
-import Lead from 'views/Lead';
-import Expense from 'views/Expense';
-
+import CategoryList from 'views/Eventcategory/CategoryList';
+import CreateCategory from 'views/Eventcategory/CreateCategory';
+import AdddEventMember from 'views/Events/AddEventMember';
+import CreateEvent from 'views/Events/CreateEvent';
+import EventList from 'views/Events/EventList';
+import AdddWishUser from 'views/Events/AddWishUser';
+import WishUserList from 'views/Events/WishUserList';
+import JoinEventList from 'views/Events/JoinEventList';
+import CompleteEventList from 'views/Events/CompleteEventList';
+import AbsenseUser from 'views/Events/AbsenseUser';
+import CompleteEventUser from 'views/Events/CompleteEventUser';
+import UserMark from 'views/Events/CreateUserMark/UserMark';
+import UserMarkList from 'views/Events/UserMarkList';
+import CreateUserMark from 'views/Events/CreateUserMark';
+import Profile from 'views/Profile/Profile';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
-const LeadManagement = Loadable(lazy(() => import('views/Customer')));
-const ContactManagement = Loadable(lazy(() => import('views/People')));
-const Call = Loadable(lazy(() => import('views/Company')));
 
 
-const ShowOffer = Loadable(lazy(() => import('views/Offer/ShowOffer')));
+
+
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -57,183 +44,151 @@ const MainRoutes = {
         }
       ]
     },
+   
     {
       path: 'dashboard',
       children: [
         {
-          path: 'customer',
-          element: <LeadManagement />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'people',
-          element: <ContactManagement />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'company',
-          element: <Call />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'lead',
-          element: <Lead />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'offer',
-          element: <Offer />,
-        },
-        {
-          path: 'offer/create',
-          element: <CreateOffer />
-        },
-        {
-          path: 'offer/read/:id',
-          element: <ShowOffer />
-        },
-        {
-          path: 'offer/update/:id',
-          element: <UpdateOffer />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'invoice',
-          element: <Invoice />
-        },
-        {
-          path: 'invoice/create',
-          element: <CreateInvoice />
-        },
-        {
-          path: 'invoice/read/:id',
-          element: <ShowInvoice />
-        },
-        {
-          path: "invoice/update/:id",
-          element: <UpdateInvoice />
-        },
-        {
-          path: "invoice/pay/:id",
-          element: <RecordInvoice />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'quote',
-          element: <Quote />
-        },
-        {
-          path: 'quote/create',
-          element: <CreateQuote />
-        },
-        {
-          path: 'quote/read/:id',
-          element: <ShowQuote />
-        },
-        {
-          path: "quote/update/:id",
-          element: <UpdateQuote />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'payment',
-          element: <Payment />
-        },
-        {
-          path: "payment/read/:id",
-          element: <ShowPayment />
-        },
-        {
-          path: "payment/update/:id",
-          element: <UpdatePayment />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'expense',
-          element: <Expense />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'product',
-          element: <Products />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'product-category',
-          element: <ProductCategory />
-        }
-      ]
-    },
-    {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'settings',
+          path: 'EventCategory',
           children: [
             {
-              path: 'admin',
-              element: <Admin />
+              path: 'CategoryList',
+              element: <CategoryList />
             },
             {
-              path: 'general-settings',
-              element: <GeneralSettings />
+              path: 'CreateCategory',
+              element: <CreateCategory />
+            },
+
+          ]
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'Events',
+          children: [
+            {
+              path: 'AddEventMember',
+              element: <AdddEventMember />
             },
             {
-              path: 'expenses-category',
-              element: <ExpenseCategory />
+              path: 'CreateEvent',
+              element: <CreateEvent />
             },
             {
-              path: 'payment-mode',
-              element: <PaymentMode />
+              path: 'EventList',
+              element: <EventList />
             },
             {
-              path: 'tax',
-              element: <Tax />
+              path: 'AddWishUser',
+              element: <AdddWishUser />
             },
             {
-              path: 'about',
-              element: <About />
-            }
+              path: 'WishUserList',
+              element: <WishUserList />
+            },
+            {
+              path: 'JoinEventList',
+              element: <JoinEventList />
+            },
+            {
+              path: 'CompleteEventList',
+              element: <CompleteEventList />
+            },
+            {
+              path: 'AbsenseUser',
+              element: <AbsenseUser />
+            },
+            {
+              path: 'CompleteEventUser',
+              element: <CompleteEventUser />
+            },
+
+
+
+          ]
+        }
+      ]
+    }, {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'EventMembers',
+          children: [
+            {
+              path: 'AddEventMember',
+              element: <AdddEventMember />
+            },
+
+            {
+              path: 'JoinEventList',
+              element: <JoinEventList />
+            },
+
+
+
+          ]
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'WishList',
+          children: [
+            
+            {
+              path: 'AddWishUser',
+              element: <AdddWishUser/>
+            },
+            {
+              path: 'WishUserList',
+              element: <WishUserList/>
+            },
+           
+
+
+           
+          ]
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'UserMark',
+          children: [
+            
+            {
+              path: 'CreateUserMark',
+              element: <CreateUserMark/>
+            },
+            {
+              path: 'UserMarkList',
+              element: <UserMarkList/>
+            },
+          
+          ]
+        }
+      ]
+    },
+    {
+      path: 'dashboard',
+      children: [
+        {
+          path: 'Profile',
+          children: [
+            {
+              path: 'Profile',
+              element: <Profile/>
+            }, 
+           
+
           ]
         }
       ]

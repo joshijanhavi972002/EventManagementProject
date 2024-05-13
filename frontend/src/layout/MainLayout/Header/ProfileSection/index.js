@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -35,6 +36,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import UpgradePlanCard from './UpgradePlanCard';
 import User1 from 'assets/images/users/user-round.svg';
+import { fetchProfileData } from 'api/apiUtils';
 
 // assets
 import { IconLogout, IconSearch, IconSettings, IconUser } from '@tabler/icons';
@@ -48,6 +50,7 @@ const ProfileSection = () => {
 
   const [sdm, setSdm] = useState(true);
   const [value, setValue] = useState('');
+  const [categories, setCategories] = useState([]);
   const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
@@ -56,7 +59,17 @@ const ProfileSection = () => {
    * */
   const anchorRef = useRef(null);
   const handleLogout = async () => {
-    console.log('Logout');
+    const token = Cookies.get('token');
+    if (!token) {
+      // Token not found, redirect to login page
+      navigate('/login');
+      return;
+  }
+
+  // Perform logout logic (clear token, redirect, etc.)
+  Cookies.remove('token');
+  Cookies.remove('user');
+  navigate('/login');
   };
 
   const handleClose = (event) => {
@@ -85,6 +98,27 @@ const ProfileSection = () => {
     }
 
     prevOpen.current = open;
+    const token = Cookies.get('token');
+    console.log('token ',token);
+   if (!token) {
+        navigate('/login')
+       return;
+   }
+  
+  
+   const fetchData = async () => {
+       try {
+           const response = await fetchProfileData(`http://localhost:3001/Adminapi/profile/${token}`);
+           setCategories(response);
+        
+       } catch (error) {
+           console.error('Error fetching data:', error);
+           
+       }
+   };
+
+   fetchData(); 
+
   }, [open]);
 
   return (
@@ -157,14 +191,14 @@ const ProfileSection = () => {
                   <Box sx={{ p: 2 }}>
                     <Stack>
                       <Stack direction="row" spacing={0.5} alignItems="center">
-                        <Typography variant="h4">Good Morning,</Typography>
-                        <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
+                        <Typography variant="h4">Hello {categories.firstName} {categories.lastName},</Typography>
+                        {/* <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
                           Johne Doe
-                        </Typography>
+                        </Typography> */}
                       </Stack>
                       <Typography variant="subtitle2">Project Admin</Typography>
                     </Stack>
-                    <OutlinedInput
+                    {/* <OutlinedInput
                       sx={{ width: '100%', pr: 1, pl: 2, my: 2 }}
                       id="input-search-profile"
                       value={value}
@@ -179,20 +213,20 @@ const ProfileSection = () => {
                       inputProps={{
                         'aria-label': 'weight'
                       }}
-                    />
-                    <Divider />
+                    /> */}
+                    {/* <Divider /> */}
                   </Box>
-                  <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
+                  {/* <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}> */}
                     <Box sx={{ p: 2 }}>
-                      <UpgradePlanCard />
-                      <Divider />
-                      <Card
+                      {/* <UpgradePlanCard /> */}
+                      {/* <Divider /> */}
+                      {/* <Card
                         sx={{
                           bgcolor: theme.palette.primary.light,
                           my: 2
                         }}
-                      >
-                        <CardContent>
+                      > */}
+                        {/* <CardContent>
                           <Grid container spacing={3} direction="column">
                             <Grid item>
                               <Grid item container alignItems="center" justifyContent="space-between">
@@ -226,10 +260,10 @@ const ProfileSection = () => {
                               </Grid>
                             </Grid>
                           </Grid>
-                        </CardContent>
-                      </Card>
-                      <Divider />
-                      <List
+                        </CardContent> */}
+                      {/* </Card> */}
+                      {/* <Divider /> */}
+                      {/* <List
                         component="nav"
                         sx={{
                           width: '100%',
@@ -244,45 +278,45 @@ const ProfileSection = () => {
                             mt: 0.5
                           }
                         }}
-                      >
-                        <ListItemButton
+                      > */}
+                        {/* <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 0}
                           onClick={(event) => handleListItemClick(event, 0, '#')}
-                        >
-                          <ListItemIcon>
+                        > */}
+                          {/* <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.3rem" />
-                          </ListItemIcon>
-                          <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} />
-                        </ListItemButton>
-                        <ListItemButton
+                          </ListItemIcon> */}
+                          {/* <ListItemText primary={<Typography variant="body2">Account Settings</Typography>} /> */}
+                        {/* </ListItemButton> */}
+                        {/* <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 1}
                           onClick={(event) => handleListItemClick(event, 1, '#')}
-                        >
-                          <ListItemIcon>
+                        > */}
+                          {/* <ListItemIcon>
                             <IconUser stroke={1.5} size="1.3rem" />
-                          </ListItemIcon>
-                          <ListItemText
+                          </ListItemIcon> */}
+                          {/* <ListItemText
                             primary={
                               <Grid container spacing={1} justifyContent="space-between">
-                                <Grid item>
-                                  <Typography variant="body2">Social Profile</Typography>
-                                </Grid>
-                                <Grid item>
-                                  <Chip
+                                <Grid item> */}
+                                  {/* <Typography variant="body2">Social Profile</Typography> */}
+                                {/* </Grid>
+                                <Grid item> */}
+                                  {/* <Chip
                                     label="02"
                                     size="small"
                                     sx={{
                                       bgcolor: theme.palette.warning.dark,
                                       color: theme.palette.background.default
                                     }}
-                                  />
-                                </Grid>
+                                  /> */}
+                                {/* </Grid>
                               </Grid>
                             }
-                          />
-                        </ListItemButton>
+                          /> */}
+                        {/* </ListItemButton> */}
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 4}
@@ -293,9 +327,9 @@ const ProfileSection = () => {
                           </ListItemIcon>
                           <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
                         </ListItemButton>
-                      </List>
+                      {/* </List> */}
                     </Box>
-                  </PerfectScrollbar>
+                  {/* </PerfectScrollbar> */}
                 </MainCard>
               </ClickAwayListener>
             </Paper>

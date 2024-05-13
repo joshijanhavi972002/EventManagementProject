@@ -10,7 +10,7 @@ import AuthCardWrapper from '../AuthCardWrapper';
 import Logo from 'ui-component/Logo';
 import AuthRegister from '../auth-forms/AuthRegister';
 import AuthFooter from 'ui-component/cards/AuthFooter';
-
+import { postData } from 'api/apiUtils';
 // assets
 
 // ===============================|| AUTH3 - REGISTER ||=============================== //
@@ -18,6 +18,7 @@ import AuthFooter from 'ui-component/cards/AuthFooter';
 const Register = () => {
   const theme = useTheme();
   const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+  
 
   return (
     <AuthWrapper1>
@@ -27,11 +28,11 @@ const Register = () => {
             <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
               <AuthCardWrapper>
                 <Grid container spacing={2} alignItems="center" justifyContent="center">
-                  <Grid item sx={{ mb: 3 }}>
+                  {/* <Grid item sx={{ mb: 3 }}>
                     <Link to="#">
                       <Logo />
                     </Link>
-                  </Grid>
+                  </Grid> */}
                   <Grid item xs={12}>
                     <Grid container direction={matchDownSM ? 'column-reverse' : 'row'} alignItems="center" justifyContent="center">
                       <Grid item>
@@ -54,7 +55,7 @@ const Register = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <Grid item container direction="column" alignItems="center" xs={12}>
-                      <Typography component={Link} to="/pages/login/login3" variant="subtitle1" sx={{ textDecoration: 'none' }}>
+                      <Typography component={Link} to="/login" variant="subtitle1" sx={{ textDecoration: 'none' }}>
                         Already have an account?
                       </Typography>
                     </Grid>

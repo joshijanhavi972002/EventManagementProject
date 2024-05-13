@@ -1,0 +1,27 @@
+import mongoose from 'mongoose';
+
+const addEventUserWishSchema = new mongoose.Schema({
+  Event_Name: {
+    type: String,
+    ref: 'Create_Event', 
+    required: true,
+  },
+  User: {
+    type: String,
+    ref: 'User', 
+    required: true,
+  },
+  Status: {
+    type: String,
+    // enum: ['active', 'inactive'],
+    // default: 'active',
+  },
+  Delete:{
+    type :String,
+    default:false
+  }
+});
+
+const Add_Event_UserWish = mongoose.model('Add_Event_UserWish', addEventUserWishSchema);
+
+export default Add_Event_UserWish;

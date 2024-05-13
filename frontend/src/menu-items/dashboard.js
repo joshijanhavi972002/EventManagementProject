@@ -1,18 +1,5 @@
-
 import { AiOutlineDashboard } from "react-icons/ai";
-import { AiOutlineCustomerService } from "react-icons/ai";
-import { AiOutlineUser } from "react-icons/ai";
-import { AiOutlineBank } from "react-icons/ai";
-import { AiOutlineFilter } from "react-icons/ai";
-import { AiOutlineFile } from "react-icons/ai";
-import { AiOutlineContainer } from "react-icons/ai";
-import { AiOutlineFileSync } from "react-icons/ai";
-import { AiOutlineCreditCard } from "react-icons/ai";
-import { AiOutlineWallet } from "react-icons/ai";
-import { AiOutlineTag } from "react-icons/ai";
-import { AiOutlineTags } from "react-icons/ai";
-import { CiSettings } from "react-icons/ci";
-
+import { AiOutlineCalendar,AiOutlineFileAdd, AiOutlineBars,AiOutlineUser, AiOutlineLogout } from "react-icons/ai"; // Add this import for the new icon
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -26,148 +13,203 @@ const dashboard = {
       type: 'item',
       url: '/dashboard/default',
       icon: AiOutlineDashboard,
-      breadcrumbs: false
-    },
-    {
-      id: '01',
-      title: 'Customer',
-      type: 'item',
-      url: '/dashboard/customer',
-      icon: AiOutlineCustomerService,
-      breadcrumbs: false
-    },
-    {
-      id: '02',
-      title: 'People',
-      type: 'item',
-      url: '/dashboard/people',
-      icon: AiOutlineUser,
-      breadcrumbs: false
-    },
-    {
-      id: '03',
-      title: 'Company',
-      type: 'item',
-      url: '/dashboard/company',
-      icon: AiOutlineBank,
-      breadcrumbs: false
-    },
-    {
-      id: '04',
-      title: 'Lead',
-      type: 'item',
-      url: '/dashboard/lead',
-      icon: AiOutlineFilter,
-      breadcrumbs: false
-    },
-    {
-      id: '05',
-      title: 'Offer',
-      type: 'item',
-      url: '/dashboard/offer',
-      icon: AiOutlineFile,
-      breadcrumbs: false
-    },
-    {
-      id: '06',
-      title: 'Invoice',
-      type: 'item',
-      url: '/dashboard/invoice',
-      icon: AiOutlineContainer,
-      breadcrumbs: false
-    },
-    {
-      id: '07',
-      title: 'Quote',
-      type: 'item',
-      url: '/dashboard/quote',
-      icon: AiOutlineFileSync,
-      breadcrumbs: false
-    },
-    {
-      id: '08',
-      title: 'Payment',
-      type: 'item',
-      url: '/dashboard/payment',
-      icon: AiOutlineCreditCard,
-      breadcrumbs: false
-    },
-    {
-      id: '09',
-      title: 'Expense',
-      type: 'item',
-      url: '/dashboard/expense',
-      icon: AiOutlineWallet,
-      breadcrumbs: false
-    },
-    {
-      id: '10',
-      title: 'Product',
-      type: 'item',
-      url: '/dashboard/product',
-      icon: AiOutlineTag,
-      breadcrumbs: false
-    },
-    {
-      id: '11',
-      title: 'Product Category',
-      type: 'item',
-      url: '/dashboard/product-category',
-      icon: AiOutlineTags,
-      breadcrumbs: false
-    },
-    {
-      id: '12',
-      title: 'Settings',
-      type: 'collapse',
-      url: '/dashboard/settings',
-      icon: CiSettings,
       breadcrumbs: false,
+      
+    },
+    // New Event Category dropdown
+    {
+      id: '13',
+      title: 'Event Category',
+      type: 'collapse', 
+      icon: AiOutlineCalendar,
       children: [
         {
           id: '01',
-          title: 'Admin',
+          // id: '01',
+          icon:AiOutlineFileAdd,
+          title: 'Create Event Category',
           type: 'item',
-          url: '/dashboard/settings/admin',
+          url: '/dashboard/EventCategory/CreateCategory', // URL for creating event category
           breadcrumbs: false
         },
         {
           id: '02',
-          title: 'General Settings',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'List of Categories',
           type: 'item',
-          url: '/dashboard/settings/general-settings',
+          url: '/dashboard/EventCategory/CategoryList', // URL for listing categories
+          breadcrumbs: false
+        }
+      ]
+      
+    },
+    {
+      id: '14',
+      title: 'Events',
+      type: 'collapse', 
+      icon: AiOutlineCalendar,
+      children: [
+        {
+          id: '01',
+          // id: '01',
+          icon:AiOutlineFileAdd,
+          title: 'Create Event',
+          type: 'item',
+          url: '/dashboard/Events/CreateEvent', // URL for creating event category
           breadcrumbs: false
         },
+        {
+          id: '02',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Event List',
+          type: 'item',
+          url: '/dashboard/Events/EventList', // URL for listing categories
+          breadcrumbs: false
+        },
+       
+       
+       
         {
           id: '03',
-          title: 'Expenses Category',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Complete Event List',
           type: 'item',
-          url: '/dashboard/settings/expenses-category',
+          url: '/dashboard/Events/CompleteEventList', // URL for listing categories
           breadcrumbs: false
-        },
-        {
+        }, {
           id: '04',
-          title: 'Payment Mode',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Absense User',
           type: 'item',
-          url: '/dashboard/settings/payment-mode',
+          url: '/dashboard/Events/AbsenseUser', // URL for listing categories
           breadcrumbs: false
         },
         {
           id: '05',
-          title: 'Tax',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Complete Event User',
           type: 'item',
-          url: '/dashboard/settings/tax',
+          url: '/dashboard/Events/CompleteEventUser', // URL for listing categories
+          breadcrumbs: false
+        }
+        
+
+      ]
+      
+    },
+    {
+      id: '15',
+      title: 'Event Members',
+      type: 'collapse', 
+      icon: AiOutlineCalendar,
+      children: [
+       
+        {
+          id: '01',
+          // id: '02',
+          icon:AiOutlineFileAdd,
+          title: 'Add Event Member',
+          type: 'item',
+          url: '/dashboard/EventMembers/AddEventMember', // URL for listing categories
           breadcrumbs: false
         },
         {
-          id: '06',
-          title: 'About',
+          id: '02',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Join Event List',
           type: 'item',
-          url: '/dashboard/settings/about',
+          url: '/dashboard/EventMembers/JoinEventList', // URL for listing categories
           breadcrumbs: false
-        }
-      ]
-    }
+        },
+      ]      
+    }, 
+    {
+      id: '16',
+      title: 'Wish List',
+      type: 'collapse', 
+      icon: AiOutlineCalendar,
+      children: [
+       
+        {
+          id: '01',
+          // id: '02',
+          icon:AiOutlineFileAdd,
+          title: 'Add Wish User',
+          type: 'item',
+          url: '/dashboard/WishList/AddWishUser', // URL for listing categories
+          breadcrumbs: false
+        },
+       
+        {
+          id: '02',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'Wish Event List',
+          type: 'item',
+          url: '/dashboard/WishList/WishUserList', // URL for listing categories
+          breadcrumbs: false
+        },
+        
+      ]  
+    },{
+      id: '17',
+      title: 'User Mark',
+      type: 'collapse', 
+      icon: AiOutlineCalendar,
+      children: [
+       
+        {
+          id: '01',
+          // id: '02',
+          icon:AiOutlineFileAdd,
+          title: 'Create User Mark',
+          type: 'item',
+          url: '/dashboard/UserMark/CreateUserMark', // URL for listing categories
+          breadcrumbs: false
+        },
+       
+        {
+          id: '02',
+          // id: '02',
+          icon: AiOutlineBars,
+          title: 'User Mark List',
+          type: 'item',
+          url: '/dashboard/UserMark/UserMarkList', // URL for listing categories
+          breadcrumbs: false
+        },
+        
+      ]  
+    },
+    // {
+    //     id: '18',
+    //     title: 'Setting',
+    //     type: 'item',
+    //     url: '/dashboard/customer',
+    //     icon: CiSettings,
+    //     breadcrumbs: false
+    //   },
+      {
+        id: '19',
+        title: 'Profile',
+        type: 'item',
+        url: '/dashboard/Profile/Profile',
+        icon: AiOutlineUser,
+        breadcrumbs: false
+      },
+    //   {
+    //     id: '20',
+    //     title: 'logout',
+    //     type: 'item',
+    //     url: '/dashboard/customer',
+    //     icon:AiOutlineLogout,
+    //     breadcrumbs: false
+    //   },
   ]
 };
 
