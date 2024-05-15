@@ -9,6 +9,7 @@ import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 
 function UserMark() {
     const navigate=useNavigate();
+    const[id ,setid]=useState();
     const [error,setError]=useState([]);
     const [categories, setCategories] = useState([]);
     const [formData, setFormData] = useState({
@@ -19,7 +20,8 @@ function UserMark() {
     });
     const [errors, setErrors] = useState({});
     useEffect(() => {
-        checkTokenAndRedirect();
+        const id=checkTokenAndRedirect();
+        setid(id)
       }, []);
      //  <<<<<<<<<<<<<<<<<<<====================== for sending data to backend start===================>>>>>>>>>>>>>>>>
 
@@ -44,7 +46,7 @@ function UserMark() {
         e.preventDefault();
         try {
             await userMarkValidationSchema.validate(formData, { abortEarly: false });
-            await postData('http://localhost:3001/UserMarkapi/CreateUserMark', formData);
+            await postData(`http://localhost:3001/UserMarkapi/CreateUserMark/${id}`, formData);
             navigate('/dashboard/UserMark/UserMarkList');
         } catch (error) {
             if (error.name === 'ValidationError') {

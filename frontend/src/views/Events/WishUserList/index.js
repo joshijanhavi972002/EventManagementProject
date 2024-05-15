@@ -89,8 +89,9 @@ const WishUserList = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    fetchData('http://localhost:3001/EventWishUserapi/ViewWishUser', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/EventWishUserapi/ViewWishUser/${_id}`, setCategories, setError);
+    setId(_id)
   }, []);
   if (error) {
     console.log(error);
@@ -98,7 +99,7 @@ const WishUserList = () => {
 
   const deleteCategory = async (id) => {
     try {
-      const response = await deleteData(`http://localhost:3001/EventWishUserapi/DeleteWishUser/${id}`);
+      const response = await deleteData(`http://localhost:3001/EventWishUserapi/DeleteWishUser/${id}/${Id}`);
       handleCloseDialog();
       setCategories(response);
     } catch (error) {

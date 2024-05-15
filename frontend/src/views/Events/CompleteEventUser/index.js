@@ -79,8 +79,9 @@ const CompleteEventUser = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    const response=fetchData('http://localhost:3001/AddEventMemberapi/CompleteEventMember', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    const response=fetchData(`http://localhost:3001/AddEventMemberapi/CompleteEventMember/${_id}`, setCategories, setError);
+    setId(_id)
   }, []);
   if (error) {
     console.log(error);
@@ -130,7 +131,7 @@ const CompleteEventUser = () => {
       {/* <JoinList open={openAdd} handleClose={handleCloseAdd} mode={mode} data={rowData} categories={categories} /> */}
       <Container>
         <Stack direction="row" alignItems="center" mb={5} justifyContent={'space-between'}>
-          <Typography variant="h4">Complete Event List</Typography>
+          <Typography variant="h4">Complete Event User</Typography>
           <Stack direction="row" alignItems="center" justifyContent={'flex-end'} spacing={2}>
             <Button variant="contained" startIcon={<Iconify icon="eva:plus-fill" />} onClick={() => { handleCreateCategory() }}>
               Create Event

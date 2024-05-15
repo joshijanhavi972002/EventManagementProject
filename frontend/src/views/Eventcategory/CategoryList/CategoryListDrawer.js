@@ -24,7 +24,8 @@ export default function CategoryListDrawer(props) {
     useEffect(() => {
         const categoryData = categories.find(category => category._id === data);
         setUpdatedData(categoryData);
-        checkTokenAndRedirect();
+        const _id=checkTokenAndRedirect();
+        
     }, [data]);
 
     const handleInputChange = async (e) => {

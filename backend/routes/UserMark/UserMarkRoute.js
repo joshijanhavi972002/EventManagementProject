@@ -3,6 +3,6 @@ import { addUserMarkController,viewUserMarkController } from '../../controller/u
 
 const UserMarkRoute = express.Router();
 
-UserMarkRoute.post('/CreateUserMark',addUserMarkController );
-UserMarkRoute.get('/getUserMark',viewUserMarkController );
+UserMarkRoute.post('/CreateUserMark/:id',addUserMarkController );
+UserMarkRoute.get('/getUserMark/:id',viewUserMarkController );
 export default UserMarkRoute;

@@ -3,6 +3,9 @@ import Event_Category from '../../model/Event_Category.js';
 
 
 export const addCategoryController = async (req, res) => {
+   
+    const { id } = req.params;
+  
     try {
             
             const data = req.body;
@@ -13,6 +16,7 @@ export const addCategoryController = async (req, res) => {
                 // Image:data.Image,
                 Priority: data.Priority,
                 Status: data.Status,
+                CreatedBy:id
             });
 
             const savedEventCategory = await newEventCategory.save();
@@ -26,8 +30,10 @@ export const addCategoryController = async (req, res) => {
 };
 
 export const viewCategoryController = async (req, res) => {
+    const { id } = req.params;
+   
     try {
-        const categories = await Event_Category.find({ Delete: false }); 
+        const categories = await Event_Category.find({ Delete: false , CreatedBy:id}); 
      
         res.status(200).json(categories);
     } catch (error) {
@@ -75,7 +81,7 @@ export const updateCategoryController = async (req,res) => {
     }
 };
 export const deleteCategoryController = async (req, res) => {
-    const { id } = req.params;
+    const { id ,Id } = req.params;
   
   
     try {
@@ -85,7 +91,7 @@ export const deleteCategoryController = async (req, res) => {
       if (!updatedCategory) {
         return res.status(404).json({ message: 'Event category not found' });
       }
-      const categories = await Event_Category.find({ Delete: false }); 
+      const categories = await Event_Category.find({ Delete: false ,CreatedBy:Id }); 
       res.json({ message: 'Event category  deleted successfully', category: categories });
     } catch (error) {
       console.error('Error soft deleting event category:', error);
@@ -95,9 +101,10 @@ export const deleteCategoryController = async (req, res) => {
   
   
 export const getEventCategoryCount = async (req, res) => {
+    const { id} = req.params;
     try {
       // Count only the Event_category records where delete is false
-      const categoryCount = await Event_Category.countDocuments({ Delete: false });
+      const categoryCount = await Event_Category.countDocuments({ Delete: false,CreatedBy:id });
       res.json( categoryCount );
     } catch (err) {
       console.error('Error counting Event categories:', err);

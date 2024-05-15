@@ -41,6 +41,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Dashboard } from '@mui/icons-material';
 import DashboardEventList from '../Default/DashboardEventList';
+import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -89,8 +90,9 @@ const DashboardEventList2 = () => {
 
 
   useEffect(() => {
-
-    fetchData('http://localhost:3001/CreateEventapi/ViewEvent', setCategories, setError);
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/CreateEventapi/ViewEvent/${_id}`, setCategories, setError);
+    setId(_id) 
   }, []);
 
   if (error) {
@@ -99,7 +101,7 @@ const DashboardEventList2 = () => {
   //  delete functionality  start
   const deleteCategory = async (id) => {
     try {
-      const response = await deleteData(`http://localhost:3001/CreateEventapi/DeleteEvent/${id}`);
+      const response = await deleteData(`http://localhost:3001/CreateEventapi/DeleteEvent/${id}/${Id}`);
       handleCloseDialog();
       setCategories(response);
     } catch (error) {

@@ -9,6 +9,7 @@ import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 function Wishuser() {
     const navigate=useNavigate();
     const [error,setError]=useState([]);
+    const[id ,setid]=useState();
     const [categories, setCategories] = useState([]);
     const [formData, setFormData] = useState({
         Event_Name: '',
@@ -38,7 +39,7 @@ function Wishuser() {
         e.preventDefault();
         try {
             await wishUserValidationSchema.validate(formData, { abortEarly: false });
-            await postData('http://localhost:3001/EventWishUserapi/AddWishUser', formData);
+            await postData(`http://localhost:3001/EventWishUserapi/AddWishUser/${id}`, formData);
             navigate('/dashboard/Events/WishUserList');
         } catch (error) {
             if (error.name === 'ValidationError') {
@@ -55,8 +56,9 @@ function Wishuser() {
     //----------------------for fetching categories start-----------------------
   
         useEffect(() => {
-            fetchData('http://localhost:3001/CreateEventapi/ViewEvent', setCategories,setError); 
-            checkTokenAndRedirect();
+            const id=checkTokenAndRedirect();
+            fetchData(`http://localhost:3001/CreateEventapi/ViewEvent/${id}`, setCategories,setError); 
+            setid(id)
         }, []);
         if (error) {
             console.log(error);

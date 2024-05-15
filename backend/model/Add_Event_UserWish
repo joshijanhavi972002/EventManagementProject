@@ -19,7 +19,11 @@ const addEventUserWishSchema = new mongoose.Schema({
   Delete:{
     type :String,
     default:false
-  }
+  },
+  CreatedBy: {
+    type: mongoose.Schema.Types.ObjectId, 
+    required: true,
+  }, 
 });
 
 const Add_Event_UserWish = mongoose.model('Add_Event_UserWish', addEventUserWishSchema);

@@ -9,7 +9,7 @@ import { Box, Grid, Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
-
+import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 // assets
 
 import Divider from '@mui/material/Divider';
@@ -69,8 +69,8 @@ const CompleteEvent = ({ isLoading }) => {
   
   
     useEffect(() => {
-  
-      fetchData('http://localhost:3001/CreateEventapi/GetCompleteCount', setCategories, setError);
+        const _id=checkTokenAndRedirect();
+      fetchData(`http://localhost:3001/CreateEventapi/GetCompleteCount/${_id}`, setCategories, setError);
     }, []);
   
     if (error) {

@@ -1,6 +1,7 @@
 import Add_Event_Member from "../../model/Add_Event_Member.js";
 
 export const addEventMemberController = async (req, res) => {
+    const { id } = req.params;
     try {
         const eventData = req.body;
       
@@ -10,6 +11,7 @@ export const addEventMemberController = async (req, res) => {
             User: eventData.User,
             Attendee_Status: eventData.Attendee_Status,
             Status: eventData.Status,
+            CreatedBy:id
         });
 
         const savedEventMember = await newEventMember.save();
@@ -22,8 +24,9 @@ export const addEventMemberController = async (req, res) => {
 };
 
 export const viewEventMemberController = async (req, res) => {
+    const { id } = req.params;
     try {
-        const EventMember = await Add_Event_Member.find({ Delete: false });
+        const EventMember = await Add_Event_Member.find({ Delete: false,CreatedBy:id });
        
         res.status(200).json(EventMember);
     } catch (error) {
@@ -67,7 +70,7 @@ export const updateEventMemberController = async (req, res) => {
 };
 
 export const deleteEventMemberController = async (req, res) => {
-    const { id } = req.params;
+    const { id ,Id} = req.params;
    
 
     try {
@@ -77,7 +80,7 @@ export const deleteEventMemberController = async (req, res) => {
         if (!deleteEventMember) {
             return res.status(404).json({ message: 'Event category not found' });
         }
-        const categories = await Add_Event_Member.find({ Delete: false });
+        const categories = await Add_Event_Member.find({ Delete: false ,CreatedBy:Id });
         res.json({ message: 'Event category  deleted successfully', category:  categories});
     } catch (error) {
         console.error('Error soft deleting event category:', error);
@@ -86,9 +89,10 @@ export const deleteEventMemberController = async (req, res) => {
 };
 
 export const getAbsentEventMembersController = async (req, res) => {
+    const { id } = req.params;
     try {
         
-        const absentEventMembers = await Add_Event_Member.find({ Attendee_Status: "absent" ,Delete: false});
+        const absentEventMembers = await Add_Event_Member.find({ Attendee_Status: "absent" ,Delete: false,CreatedBy:id});
      
         res.status(200).json( absentEventMembers );
     } catch (error) {
@@ -97,9 +101,10 @@ export const getAbsentEventMembersController = async (req, res) => {
     }
 };
 export const getCompleteEventMembersController = async (req, res) => {
+    const { id } = req.params;
     try {
       
-        const completeEventMembers = await Add_Event_Member.find({ Attendee_Status: "completed", Delete: false});
+        const completeEventMembers = await Add_Event_Member.find({ Attendee_Status: "completed", Delete: false,CreatedBy:id});
       
         res.status(200).json( completeEventMembers );
     } catch (error) {

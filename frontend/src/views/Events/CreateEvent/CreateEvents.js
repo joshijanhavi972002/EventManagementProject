@@ -14,6 +14,7 @@ import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 function CreateCategoryDrawer() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
+    const[id ,setid]=useState();
     const [error,setError]=useState([]);
     const [formData, setFormData] = useState({
         // Event_Category: '',
@@ -38,8 +39,9 @@ function CreateCategoryDrawer() {
     
     // ----------------------for fetching categories start-----------------------
     useEffect(() => {
-        checkTokenAndRedirect();
-        fetchData('http://localhost:3001/EventCategoryapi/ViewCategory', setCategories,setError); 
+        const _id=checkTokenAndRedirect();
+        setid(_id)
+        fetchData(`http://localhost:3001/EventCategoryapi/ViewCategory/${_id}`, setCategories,setError); 
        
     }, []);
     if (error) {
@@ -76,13 +78,28 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         await eventvalidationSchema.validate(formData, { abortEarly: false });
+        console.log("formdataaaa ",formData);
+      
         const formDataToSend = new FormData();
-        formDataToSend.append('Category', formData.Category);
-        formDataToSend.append('Code', formData.Code);
-        formDataToSend.append('Image', formData.Image); // Append the file content
-        formDataToSend.append('Priority', formData.Priority);
+        formDataToSend.append('Event_Category', formData.Event_Category);
+        formDataToSend.append('Event_Name', formData.Event_Name);
+        formDataToSend.append('Uid', formData.Uid);
+        formDataToSend.append('Description', formData.Description);
+        formDataToSend.append('Job_Category', formData.Job_Category);
+        formDataToSend.append('Venue', formData.Venue);
+        formDataToSend.append('Start_Date', formData.Start_Date);
+        formDataToSend.append('End_Date', formData.End_Date);
+        formDataToSend.append('Location', formData.Location);
+        formDataToSend.append('Maximum_Attendee', formData.Maximum_Attendee);
+        formDataToSend.append('Speaker_Name', formData.Speaker_Name);
+        formDataToSend.append('Session_Name', formData.Session_Name);
+        formDataToSend.append('Start_Time', formData.Start_Time);
+        formDataToSend.append('End_Time', formData.End_Time);
+        formDataToSend.append('Venue_Name', formData.Venue_Name);
         formDataToSend.append('Status', formData.Status);
-        await postData('http://localhost:3001/CreateEventapi/CreateEvent', formDataToSend);
+        formDataToSend.append('Image', formData.Image);
+       
+        await postData(`http://localhost:3001/CreateEventapi/CreateEvent/${id}`, formDataToSend);
         navigate('/dashboard/Events/EventList');
     } catch (error) {
         if (error.name === 'ValidationError') {

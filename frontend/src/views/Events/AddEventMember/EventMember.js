@@ -12,6 +12,7 @@ import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 function EventMember() {
     const navigate = useNavigate();
     const [error, setError] = useState([]);
+    const[id ,setid]=useState();
     const [categories, setCategories] = useState([]);
     const [formData, setFormData] = useState({
         Event_Name: '',
@@ -20,9 +21,7 @@ function EventMember() {
         Status: '', 
     });
     const [errors, setErrors] = useState({});
-    useEffect(() => {
-        checkTokenAndRedirect();
-    });
+   
     //  <<<<<<<<<<<<<<<<<<<====================== for sending data to backend start===================>>>>>>>>>>>>>>>>
 
     const handleInputChange = async (e) => {
@@ -46,7 +45,7 @@ function EventMember() {
         e.preventDefault();
         try {
             await eventMemberValidationSchema.validate(formData, { abortEarly: false });
-            await postData('http://localhost:3001/AddEventMemberapi/AddEventMember', formData);
+            await postData(`http://localhost:3001/AddEventMemberapi/AddEventMember/${id}`, formData);
             navigate('/dashboard/Events/JoinEventList');
         } catch (error) {
             if (error.name === 'ValidationError') {
@@ -63,7 +62,10 @@ function EventMember() {
     //----------------------for fetching categories start-----------------------
 
     useEffect(() => {
-        fetchData('http://localhost:3001/CreateEventapi/ViewEvent', setCategories, setError);
+        const id =checkTokenAndRedirect();
+       
+        fetchData(`http://localhost:3001/CreateEventapi/ViewEvent/${id}`, setCategories, setError);
+        setid(id)
     }, []);
     if (error) {
         console.log(error);

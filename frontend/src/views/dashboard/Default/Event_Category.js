@@ -11,6 +11,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 import { useEffect } from 'react';
 import { fetchData } from 'api/apiUtils';
+import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 // assets
 
 import Divider from '@mui/material/Divider';
@@ -70,7 +71,8 @@ const Event_Category = ({ isLoading }) => {
 
 
   useEffect(() => {
-    fetchData('http://localhost:3001/EventCategoryapi/GetCountCategory', setCategories, setError);
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/EventCategoryapi/GetCountCategory/${_id}`, setCategories, setError);
   }, []);
 
   if (error) {

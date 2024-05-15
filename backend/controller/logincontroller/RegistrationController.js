@@ -45,3 +45,15 @@ export const registerController = async (request, response) => {
         response.status(500).json({ message: 'Internal server error' });
     }
 }
+ 
+export const getregistrationCount = async (req, res) => {
+    
+    try {
+      // Count only the Event_category records where delete is false
+      const categoryCount = await ADMIN_CREDENTIALS.countDocuments();
+      res.json( categoryCount );
+    } catch (err) {
+      console.error('Error counting Event categories:', err);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };

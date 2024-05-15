@@ -81,8 +81,9 @@ const CompleteEventList = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    const response=fetchData('http://localhost:3001/CreateEventapi/CompleteEventList', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    const response=fetchData(`http://localhost:3001/CreateEventapi/CompleteEventList/${_id}`, setCategories, setError);
+  
   }, []);
   if (error) {
     console.log(error);

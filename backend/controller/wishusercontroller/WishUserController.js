@@ -1,6 +1,7 @@
 import Add_Event_UserWish from "../../model/Add_Event_UserWish";
 
 export const addUserWishController = async (req, res) => {
+    const { id } = req.params;
     try {
         const eventData = req.body;
         
@@ -9,6 +10,8 @@ export const addUserWishController = async (req, res) => {
             Event_Name: eventData.Event_Name,
             User: eventData.User,
             Status: eventData.Status,
+            CreatedBy:id
+
         });
 
         const savedEventMember = await newWishUser.save();
@@ -21,8 +24,10 @@ export const addUserWishController = async (req, res) => {
 };
 
 export const viewUserWishController = async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const EventMember = await Add_Event_UserWish.find({ Delete: false });
+        const EventMember = await Add_Event_UserWish.find({ Delete: false, CreatedBy:id });
         res.status(200).json(EventMember);
     } catch (error) {
         console.error('Error fetching categories:', error);
@@ -66,7 +71,7 @@ export const updateUserWishController = async (req, res) => {
 };
 
 export const deleteUserWishController = async (req, res) => {
-    const { id } = req.params;
+    const { id,Id  } = req.params;
     
 
     try {
@@ -76,7 +81,7 @@ export const deleteUserWishController = async (req, res) => {
         if (!deleteEventMember) {
             return res.status(404).json({ message: 'Event category not found' });
         }
-        const categories = await Add_Event_UserWish.find({ Delete: false });
+        const categories = await Add_Event_UserWish.find({ Delete: false ,CreatedBy:Id });
         res.json({ message: 'Event category  deleted successfully', category: categories });
     } catch (error) {
         console.error('Error soft deleting event category:', error);

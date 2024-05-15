@@ -6,8 +6,9 @@ import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
 import { useState, useEffect } from 'react';
 import { fetchData } from 'api/apiUtils';
+import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 
-const CardWrapper = styled(MainCard)(({ theme }) => ({
+const CardWrapper = styled(MainCard)(({ theme }) => ({ 
   backgroundColor: theme.palette.secondary.dark,
   color: '#fff',
   overflow: 'hidden',
@@ -60,7 +61,8 @@ const Events = ({ isLoading }) => {
 
 
   useEffect(() => {
-    fetchData('http://localhost:3001/CreateEventapi/GetEventCount', setCategories, setError);
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/CreateEventapi/GetEventCount/${_id}`, setCategories, setError);
   }, []);
 
   if (error) {

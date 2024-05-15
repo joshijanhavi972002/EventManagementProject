@@ -25,7 +25,11 @@ const addUserMarkSchema = new mongoose.Schema({
   Delete:{
     type :String,
     default:false
-  }
+  },
+  CreatedBy: {
+    type: mongoose.Schema.Types.ObjectId, 
+    required: true,
+  }, 
 });
 
 const User_Mark = mongoose.model('User_Mark', addUserMarkSchema);

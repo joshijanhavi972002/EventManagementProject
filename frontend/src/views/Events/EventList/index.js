@@ -88,9 +88,9 @@ const EventList = () => {
 
 
   useEffect(() => {
-
-    fetchData('http://localhost:3001/CreateEventapi/ViewEvent', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/CreateEventapi/ViewEvent/${_id}`, setCategories, setError);
+    setId(_id)
   }, []);
 
   if (error) {
@@ -99,7 +99,7 @@ const EventList = () => {
   //  delete functionality  start
   const deleteCategory = async (id) => {
     try {
-      const response = await deleteData(`http://localhost:3001/CreateEventapi/DeleteEvent/${id}`);
+      const response = await deleteData(`http://localhost:3001/CreateEventapi/DeleteEvent/${id}/${Id}`);
       handleCloseDialog();
       setCategories(response);
     } catch (error) {

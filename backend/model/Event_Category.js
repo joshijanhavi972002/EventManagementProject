@@ -8,7 +8,7 @@ const eventCategorySchema = new mongoose.Schema({
   Code: {
     type: String,
     required: true,
-    unique: true,
+  
   },
   Image: { 
     type: String
@@ -26,6 +26,10 @@ const eventCategorySchema = new mongoose.Schema({
     type: String,
     default:false
   },
+  CreatedBy: {
+    type: mongoose.Schema.Types.ObjectId, 
+    required: true,
+  }, 
 });
 
 const Event_Category = mongoose.model('Event_Category', eventCategorySchema);

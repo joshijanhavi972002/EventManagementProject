@@ -3,10 +3,10 @@ import { addUserWishController,viewUserWishController,updateUserWishController,d
  
 const EventWishRoute = express.Router();
 
-EventWishRoute.post('/AddWishUser',addUserWishController);
-EventWishRoute.get('/ViewWishUser',viewUserWishController);
+EventWishRoute.post('/AddWishUser/:id',addUserWishController);
+EventWishRoute.get('/ViewWishUser/:id',viewUserWishController);
 EventWishRoute.put('/UpdateWishUser/:id',updateUserWishController);
-EventWishRoute.delete('/DeleteWishUser/:id',deleteUserWishController);
+EventWishRoute.delete('/DeleteWishUser/:id/:Id',deleteUserWishController);
 
 
   

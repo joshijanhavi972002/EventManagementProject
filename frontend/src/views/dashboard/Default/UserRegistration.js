@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import { Box, Grid, Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonTotalOrderCard from 'ui-component/cards/Skeleton/EarningCard';
+import { fetchData } from 'api/apiUtils';
 
 // assets
 
@@ -61,6 +62,17 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 const UserRegistration = ({ isLoading }) => {
     const theme = useTheme();
+    const [categories, setCategories] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+
+        fetchData(`http://localhost:3001/Adminapi/count`, setCategories, setError);
+    }, []);
+
+
+    if (error) {
+        console.log(error);
+    }
 
     return (
         <>
@@ -93,7 +105,7 @@ const UserRegistration = ({ isLoading }) => {
                                     <Typography sx={{ marginTop: 1, color: "white" }} variant='h4'>This Month</Typography>
                                 </Grid> */}
                                 <Grid item xs={4}>
-                                    <Typography sx={{ marginTop: 1, color: "white",fontSize:30,marginLeft:9 }} variant='h4'>96</Typography>
+                                    <Typography sx={{ marginTop: 1, color: "white", fontSize: 30, marginLeft: 9 }} variant='h4'>{categories}</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -104,8 +116,8 @@ const UserRegistration = ({ isLoading }) => {
     );
 };
 
-UserRegistration .propTypes = {
+UserRegistration.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default  UserRegistration ;
+export default UserRegistration;

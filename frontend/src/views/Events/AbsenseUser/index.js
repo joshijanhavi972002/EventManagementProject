@@ -80,9 +80,9 @@ const AbsenseUser = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    const response=fetchData('http://localhost:3001/AddEventMemberapi/AbsenseEventMember', setCategories, setError);
-    checkTokenAndRedirect(); 
-
+    const _id=checkTokenAndRedirect();
+    const response=fetchData(`http://localhost:3001/AddEventMemberapi/AbsenseEventMember/${_id}`, setCategories, setError);
+   
   }, []);
   if (error) {
     console.log(error);

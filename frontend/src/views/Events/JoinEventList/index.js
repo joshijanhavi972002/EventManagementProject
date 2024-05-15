@@ -89,15 +89,16 @@ const JoinEventList = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    const response=fetchData('http://localhost:3001/AddEventMemberapi/ViewEventMember', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    const response=fetchData(`http://localhost:3001/AddEventMemberapi/ViewEventMember/${_id}`, setCategories, setError);
+    setId(_id);
   }, []);
   // if (error) {
   // }
 
   const deleteCategory = async (id) => {
     try {
-      const response = await deleteData(`http://localhost:3001/AddEventMemberapi/DeleteEventMember/${id}`);
+      const response = await deleteData(`http://localhost:3001/AddEventMemberapi/DeleteEventMember/${id}/${Id}`);
       handleCloseDialog();
       setCategories(response);
     } catch (error) {

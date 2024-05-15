@@ -19,6 +19,7 @@ export const checkTokenAndRedirect = () => {
         window.location.href = '/login';
         return;
     }
+    return tokenData.theaterOwnerData._id;
 };
 
 export const parseJwt = (token) => {

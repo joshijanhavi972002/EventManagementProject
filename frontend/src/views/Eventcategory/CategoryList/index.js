@@ -88,8 +88,9 @@ const CategoryList = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    fetchData('http://localhost:3001/EventCategoryapi/ViewCategory', setCategories, setError);
-    checkTokenAndRedirect 
+    const _id=checkTokenAndRedirect();
+    fetchData(`http://localhost:3001/EventCategoryapi/ViewCategory/${_id}`, setCategories, setError);
+    setId(_id)
   }, []);
   if (error) {
     console.log(error);
@@ -98,8 +99,8 @@ const CategoryList = () => {
   const deleteCategory = async (id) => {
     try {
       
-      const response = await deleteData(`http://localhost:3001/EventCategoryapi/DeleteCategory/${id}`);
-     
+      const response = await deleteData(`http://localhost:3001/EventCategoryapi/DeleteCategory/${id}/${Id}`);
+      console.log("response ",response);
       handleCloseDialog();
       setCategories(response);
     } catch (error) {

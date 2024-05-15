@@ -8,6 +8,7 @@ import { checkTokenAndRedirect } from 'views/Cookies/cookies';
 
 function CreateCategoryDrawer() {
     const navigate = useNavigate();
+    const[id ,setid]=useState();
     const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
         Category: '',
@@ -17,7 +18,9 @@ function CreateCategoryDrawer() {
         Status: 'active', // Default status
     });
     useEffect(() => {
-        checkTokenAndRedirect();
+        const id=checkTokenAndRedirect();
+        setid(id)
+
     });
 
     const handleInputChange = async (e) => {
@@ -57,7 +60,8 @@ function CreateCategoryDrawer() {
             formDataToSend.append('Image', formData.Image); // Append the file content
             formDataToSend.append('Priority', formData.Priority);
             formDataToSend.append('Status', formData.Status);
-            await postData('http://localhost:3001/EventCategoryapi/EventCategory', formDataToSend);
+            
+            await postData(`http://localhost:3001/EventCategoryapi/EventCategory/${id}`, formDataToSend);
             
             navigate('/dashboard/EventCategory/CategoryList');
         } catch (error) {

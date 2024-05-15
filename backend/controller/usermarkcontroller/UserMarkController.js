@@ -1,5 +1,6 @@
 import User_Mark from "../../model/User_Mark.js";
 export const addUserMarkController = async (req, res) => {
+    const { id } = req.params;
     try {
         const eventData = req.body;
         
@@ -9,7 +10,8 @@ export const addUserMarkController = async (req, res) => {
             User: eventData.User,
             Status: eventData.Status,
             Gain_Type:eventData.Gain_Type,
-            Gain_Coin:eventData.Gain_Coin
+            Gain_Coin:eventData.Gain_Coin,
+            CreatedBy:id
         });
 
         const savedEventMember = await newWishUser.save();
@@ -22,8 +24,9 @@ export const addUserMarkController = async (req, res) => {
 };
 
 export const viewUserMarkController = async (req, res) => {
+    const { id } = req.params;
     try {
-        const EventMember = await User_Mark.find({ Delete: false });
+        const EventMember = await User_Mark.find({ Delete: false, CreatedBy:id });
         res.status(200).json(EventMember);
     } catch (error) {
         console.error('Error fetching categories:', error);

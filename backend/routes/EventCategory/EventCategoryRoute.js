@@ -5,11 +5,11 @@ const EventCategoryRoute = express.Router();
 
 
 
-EventCategoryRoute.post('/EventCategory',Image, addCategoryController);
-EventCategoryRoute.get('/ViewCategory',viewCategoryController);
+EventCategoryRoute.post('/EventCategory/:id',Image, addCategoryController);
+EventCategoryRoute.get('/ViewCategory/:id',viewCategoryController);
 EventCategoryRoute.put('/UpdateCategory/:id', Image,updateCategoryController);
-EventCategoryRoute.delete('/DeleteCategory/:id',deleteCategoryController);
-EventCategoryRoute.get('/GetCountCategory',getEventCategoryCount);
+EventCategoryRoute.delete('/DeleteCategory/:id/:Id',deleteCategoryController);
+EventCategoryRoute.get('/GetCountCategory/:id',getEventCategoryCount);
 
 
 

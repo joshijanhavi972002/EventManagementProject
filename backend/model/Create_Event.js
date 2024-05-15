@@ -36,7 +36,11 @@ const createEventSchema = new mongoose.Schema({
   Delete:{
     type:String,
     default:false
-  }
+  },
+  CreatedBy: {
+    type: mongoose.Schema.Types.ObjectId, 
+    required: true,
+  }, 
   
 });
 

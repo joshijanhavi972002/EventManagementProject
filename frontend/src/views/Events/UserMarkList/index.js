@@ -81,8 +81,9 @@ const UserMarkList = () => {
 
   useEffect(() => {
     // Use fetchData to fetch categories
-    const response=fetchData('http://localhost:3001/UserMarkapi/getUserMark', setCategories, setError);
-    checkTokenAndRedirect();
+    const _id=checkTokenAndRedirect();
+    const response=fetchData(`http://localhost:3001/UserMarkapi/getUserMark/${_id}`, setCategories, setError);
+    setId(_id)
   }, []);
   if (error) {
     console.log(error);
