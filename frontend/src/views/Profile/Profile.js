@@ -132,7 +132,7 @@ function Profile() {
             fontSize: '20px',
         },
     };
-
+    
     return (
         <div style={styles.card} className="card">
             <img src={teams2 } alt="John" style={{ width: '100%' }} />

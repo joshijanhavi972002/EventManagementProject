@@ -20,7 +20,7 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const __filename = fileURLToPath(import.meta.url);
+const __filename =      (import.meta.url);
 const __dirname = dirname(__filename);
 app.use(cookieParser());
 
